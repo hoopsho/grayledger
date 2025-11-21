@@ -1,0 +1,30 @@
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35m (319.9ms)[0m  [1m[35mCREATE DATABASE "grayledger_development" ENCODING = 'unicode' /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35m (245.5ms)[0m  [1m[35mCREATE DATABASE "grayledger_test" ENCODING = 'unicode' /*application='Grayledger'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT version() /*application='Grayledger'*/[0m
+Writing tailwind-584144d1.css
+Writing application-8b441ae0.css
+Writing controllers/hello_controller-aea818e1.js
+Writing controllers/application-458fd12c.js
+Writing application-45b65402.js
+Writing stimulus.min-2395e199.js.map
+Writing stimulus-loading-1fc53fe7.js
+Writing stimulus-importmap-autoloader-64cc03e1.js
+Writing stimulus-autoloader-9d447422.js
+Writing stimulus-d59b3b7f.js
+Writing stimulus.min-4b1e420e.js
+Writing turbo.min-ad2c7b86.js
+Writing turbo-3bd2ae57.js
+Writing turbo.min-b571832f.js.map
+Writing actiontext-c9c6c481.js
+Writing actiontext.esm-c376325e.js
+Writing trix-9a18fe03.js
+Writing trix-65afdb1d.css
+Writing actioncable-ac25813f.js
+Writing actioncable.esm-e0ec9819.js
+Writing action_cable-5212cfee.js
+Writing activestorage.esm-81bb34bc.js
+Writing activestorage-f9e46063.js
+Writing rails-ujs-20eaf715.js
+Writing rails-ujs.esm-e925103b.js

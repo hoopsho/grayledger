@@ -12,9 +12,11 @@
 **Goal:** Initialize Rails 8 application with core configuration
 
 ### TASK-1.1: Initialize Rails 8 Application
-- **Status:** [ ] pending
+- **Status:** [x] DONE
 - **Dependencies:** None
 - **Blocks:** ALL subsequent tasks
+- **Completed:** 2025-11-21
+- **Notes:** Rails 8.1.1 initialized with PostgreSQL, zero build step
 - **Acceptance Criteria:**
   - Rails 8.0+ application initialized with PostgreSQL
   - Directory structure follows Rails conventions
@@ -28,9 +30,11 @@
   - Standard Rails directory structure
 
 ### TASK-1.2: Configure PostgreSQL Database
-- **Status:** [ ] pending
+- **Status:** [x] DONE
 - **Dependencies:** TASK-1.1
 - **Blocks:** TASK-2.1, TASK-2.2, TASK-6.1
+- **Completed:** 2025-11-21
+- **Notes:** Created grayledger_development and grayledger_test databases, PostgreSQL 18.1 verified
 - **Acceptance Criteria:**
   - PostgreSQL adapter configured in database.yml
   - Database created successfully (`rails db:create`)
@@ -41,9 +45,11 @@
   - `Gemfile` (add pg gem)
 
 ### TASK-1.3: Install and Configure Tailwind CSS
-- **Status:** [ ] pending
+- **Status:** [x] DONE
 - **Dependencies:** TASK-1.1
 - **Blocks:** TASK-4.3
+- **Completed:** 2025-11-21
+- **Notes:** tailwindcss-rails 4.4.0 installed, zero Node.js, Tailwind v4 auto-configuration
 - **Acceptance Criteria:**
   - tailwindcss-rails gem installed
   - Tailwind CSS compiles without errors
@@ -57,9 +63,11 @@
   - `app/views/layouts/application.html.erb`
 
 ### TASK-1.4: Configure Importmaps (Zero Build Step)
-- **Status:** [ ] pending
+- **Status:** [x] DONE
 - **Dependencies:** TASK-1.1
 - **Blocks:** TASK-4.3
+- **Completed:** 2025-11-21
+- **Notes:** importmap-rails 2.2.2, Turbo 8 (2.0.20), Stimulus 3 (1.3.4), SRI enabled
 - **Acceptance Criteria:**
   - Importmaps configured for Turbo/Stimulus
   - No Node.js, no webpack, no build step
@@ -547,13 +555,13 @@
 ## Summary Statistics
 
 - **Total Tasks:** 25
-- **Completed:** 0
+- **Completed:** 4
 - **In Progress:** 0
-- **Pending:** 25
+- **Pending:** 21
 - **Blocked:** 0
 
 **Progress by Wave:**
-- Wave 1 (Foundation): 0/4 complete (0%)
+- Wave 1 (Foundation): 4/4 complete (100%) ✓
 - Wave 2 (Core Gems): 0/3 complete (0%)
 - Wave 3 (Testing): 0/6 complete (0%)
 - Wave 4 (Security): 0/5 complete (0%)
