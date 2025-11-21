@@ -10,7 +10,7 @@ gem "pg", "~> 1.1"
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+# Hotwire's SPA-like page accelerator [https://github.com/hotwired/turbo-rails]
 gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
@@ -21,7 +21,7 @@ gem "jbuilder"
 gem "tailwindcss-rails"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
@@ -30,6 +30,9 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
+
+# Mission Control for Solid Queue admin UI
+gem "mission_control-jobs"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -42,6 +45,18 @@ gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
+
+# Money value objects for currency handling [ADR-01.001]
+# NOTE: Last release 2021, testing Rails 8 compatibility
+gem "money-rails"
+
+# Authorization with policy-based approach [https://github.com/varvet/pundit]
+# TASK-2.2: Pundit for authorization policies
+gem "pundit", "~> 2.4"
+
+# Pagination - fastest pagination gem [https://github.com/ddnexus/pagy]
+# TASK-2.2: Pagy for high-performance pagination
+gem "pagy", "~> 9.4"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

@@ -28,3 +28,467 @@ Writing activestorage.esm-81bb34bc.js
 Writing activestorage-f9e46063.js
 Writing rails-ujs-20eaf715.js
 Writing rails-ujs.esm-e925103b.js
+  [1m[35m (18.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='Grayledger'*/[0m
+  [1m[35m (7.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (12.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-11-21 05:32:47.522314', '2025-11-21 05:32:47.522320') RETURNING "key" /*application='Grayledger'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35m (16.0ms)[0m  [1m[35mCREATE DATABASE "grayledger_development" ENCODING = 'unicode' /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35m (16.5ms)[0m  [1m[35mCREATE DATABASE "grayledger_test" ENCODING = 'unicode' /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35m (15.5ms)[0m  [1m[35mCREATE DATABASE "grayledger_development" ENCODING = 'unicode' /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35m (12.7ms)[0m  [1m[35mCREATE DATABASE "grayledger_test" ENCODING = 'unicode' /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+Migrating to CreateInvoiceItems (20251121054159)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "invoice_items" ("id" bigserial primary key, "amount_cents" integer DEFAULT 0 NOT NULL, "amount_currency" character varying DEFAULT 'USD' NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_invoice_items_on_amount_cents" ON "invoice_items" ("amount_cents") /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251121054159') RETURNING "version" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (65.8ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "invoice_items" CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (15.1ms)[0m  [1m[35mCREATE TABLE "invoice_items" ("id" bigserial primary key, "amount_cents" integer DEFAULT 0 NOT NULL, "amount_currency" character varying DEFAULT 'USD' NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (7.2ms)[0m  [1m[35mCREATE INDEX "index_invoice_items_on_amount_cents" ON "invoice_items" ("amount_cents") /*application='Grayledger'*/[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35m (4.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251121054159) /*application='Grayledger'*/[0m
+  [1m[35m (9.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (4.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-11-21 05:55:47.192196', '2025-11-21 05:55:47.192204') RETURNING "key" /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Update (4.5ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2025-11-21 05:55:47.203231' WHERE "ar_internal_metadata"."key" = 'environment' /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (2.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'fd7fd21c82beed53278479bf68b628ee377afdc3', '2025-11-21 05:55:47.211230', '2025-11-21 05:55:47.211233') RETURNING "key" /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35m (145.7ms)[0m  [1m[35mCREATE DATABASE "grayledger_test" ENCODING = 'unicode' /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35m (714.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "grayledger_development" /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35m (17.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "grayledger_development" /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35m (16.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "grayledger_development" /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35m (13.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "grayledger_development" /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35m (210.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "grayledger_test" /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35m (14.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "grayledger_test" /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35m (17.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "grayledger_test" /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35m (16.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "grayledger_test" /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35m (152.8ms)[0m  [1m[35mCREATE DATABASE "grayledger_development" ENCODING = 'unicode' /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "invoice_items" CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (13.7ms)[0m  [1m[35mCREATE TABLE "invoice_items" ("id" bigserial primary key, "amount_cents" integer DEFAULT 0 NOT NULL, "amount_currency" character varying DEFAULT 'USD' NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE INDEX "index_invoice_items_on_amount_cents" ON "invoice_items" ("amount_cents") /*application='Grayledger'*/[0m
+  [1m[35m (7.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35m (6.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251121054159) /*application='Grayledger'*/[0m
+  [1m[35m (8.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (6.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-11-21 05:55:56.859604', '2025-11-21 05:55:56.859611') RETURNING "key" /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (5.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'fd7fd21c82beed53278479bf68b628ee377afdc3', '2025-11-21 05:55:56.872505', '2025-11-21 05:55:56.872510') RETURNING "key" /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35m (170.8ms)[0m  [1m[35mCREATE DATABASE "grayledger_test" ENCODING = 'unicode' /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "invoice_items" CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (10.0ms)[0m  [1m[35mCREATE TABLE "invoice_items" ("id" bigserial primary key, "amount_cents" integer DEFAULT 0 NOT NULL, "amount_currency" character varying DEFAULT 'USD' NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (8.7ms)[0m  [1m[35mCREATE INDEX "index_invoice_items_on_amount_cents" ON "invoice_items" ("amount_cents") /*application='Grayledger'*/[0m
+  [1m[35m (7.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35m (3.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20251121054159) /*application='Grayledger'*/[0m
+  [1m[35m (8.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (5.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-11-21 05:55:57.203943', '2025-11-21 05:55:57.203950') RETURNING "key" /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Update (4.3ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2025-11-21 05:55:57.215909' WHERE "ar_internal_metadata"."key" = 'environment' /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (6.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'fd7fd21c82beed53278479bf68b628ee377afdc3', '2025-11-21 05:55:57.225459', '2025-11-21 05:55:57.225464') RETURNING "key" /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+[ActiveJob] Failed enqueuing TestJob to SolidQueue(default): SolidQueue::Job::EnqueueError (ActiveRecord::StatementInvalid: PG::UndefinedTable: ERROR:  relation "solid_queue_jobs" does not exist
+LINE 10:  WHERE a.attrelid = '"solid_queue_jobs"'::regclass
+                             ^
+)
+[ActiveJob] ↳ (grayledger):2:in '<main>'
+  [1m[36mSolidQueue::Job Load (1.0ms)[0m  [1m[34mSELECT "solid_queue_jobs".* FROM "solid_queue_jobs" /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "solid_queue_blocked_executions" CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (40.5ms)[0m  [1m[35mCREATE TABLE "solid_queue_blocked_executions" ("id" bigserial primary key, "job_id" bigint NOT NULL, "queue_name" character varying NOT NULL, "priority" integer DEFAULT 0 NOT NULL, "concurrency_key" character varying NOT NULL, "expires_at" timestamp(6) NOT NULL, "created_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE INDEX "index_solid_queue_blocked_executions_for_release" ON "solid_queue_blocked_executions" ("concurrency_key", "priority", "job_id") /*application='Grayledger'*/[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE INDEX "index_solid_queue_blocked_executions_for_maintenance" ON "solid_queue_blocked_executions" ("expires_at", "concurrency_key") /*application='Grayledger'*/[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_solid_queue_blocked_executions_on_job_id" ON "solid_queue_blocked_executions" ("job_id") /*application='Grayledger'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "solid_queue_claimed_executions" CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (6.6ms)[0m  [1m[35mCREATE TABLE "solid_queue_claimed_executions" ("id" bigserial primary key, "job_id" bigint NOT NULL, "process_id" bigint, "created_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_solid_queue_claimed_executions_on_job_id" ON "solid_queue_claimed_executions" ("job_id") /*application='Grayledger'*/[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE INDEX "index_solid_queue_claimed_executions_on_process_id_and_job_id" ON "solid_queue_claimed_executions" ("process_id", "job_id") /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "solid_queue_failed_executions" CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (8.8ms)[0m  [1m[35mCREATE TABLE "solid_queue_failed_executions" ("id" bigserial primary key, "job_id" bigint NOT NULL, "error" text, "created_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (6.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_solid_queue_failed_executions_on_job_id" ON "solid_queue_failed_executions" ("job_id") /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "solid_queue_jobs" CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (8.8ms)[0m  [1m[35mCREATE TABLE "solid_queue_jobs" ("id" bigserial primary key, "queue_name" character varying NOT NULL, "class_name" character varying NOT NULL, "arguments" text, "priority" integer DEFAULT 0 NOT NULL, "active_job_id" character varying, "scheduled_at" timestamp(6), "finished_at" timestamp(6), "concurrency_key" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (7.4ms)[0m  [1m[35mCREATE INDEX "index_solid_queue_jobs_on_active_job_id" ON "solid_queue_jobs" ("active_job_id") /*application='Grayledger'*/[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE INDEX "index_solid_queue_jobs_on_class_name" ON "solid_queue_jobs" ("class_name") /*application='Grayledger'*/[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE INDEX "index_solid_queue_jobs_on_finished_at" ON "solid_queue_jobs" ("finished_at") /*application='Grayledger'*/[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE INDEX "index_solid_queue_jobs_for_filtering" ON "solid_queue_jobs" ("queue_name", "finished_at") /*application='Grayledger'*/[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE INDEX "index_solid_queue_jobs_for_alerting" ON "solid_queue_jobs" ("scheduled_at", "finished_at") /*application='Grayledger'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "solid_queue_pauses" CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (6.9ms)[0m  [1m[35mCREATE TABLE "solid_queue_pauses" ("id" bigserial primary key, "queue_name" character varying NOT NULL, "created_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_solid_queue_pauses_on_queue_name" ON "solid_queue_pauses" ("queue_name") /*application='Grayledger'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "solid_queue_processes" CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE TABLE "solid_queue_processes" ("id" bigserial primary key, "kind" character varying NOT NULL, "last_heartbeat_at" timestamp(6) NOT NULL, "supervisor_id" bigint, "pid" integer NOT NULL, "hostname" character varying, "metadata" text, "created_at" timestamp(6) NOT NULL, "name" character varying NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE INDEX "index_solid_queue_processes_on_last_heartbeat_at" ON "solid_queue_processes" ("last_heartbeat_at") /*application='Grayledger'*/[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_solid_queue_processes_on_name_and_supervisor_id" ON "solid_queue_processes" ("name", "supervisor_id") /*application='Grayledger'*/[0m
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE INDEX "index_solid_queue_processes_on_supervisor_id" ON "solid_queue_processes" ("supervisor_id") /*application='Grayledger'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "solid_queue_ready_executions" CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (28.1ms)[0m  [1m[35mCREATE TABLE "solid_queue_ready_executions" ("id" bigserial primary key, "job_id" bigint NOT NULL, "queue_name" character varying NOT NULL, "priority" integer DEFAULT 0 NOT NULL, "created_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_solid_queue_ready_executions_on_job_id" ON "solid_queue_ready_executions" ("job_id") /*application='Grayledger'*/[0m
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE INDEX "index_solid_queue_poll_all" ON "solid_queue_ready_executions" ("priority", "job_id") /*application='Grayledger'*/[0m
+  [1m[35m (7.3ms)[0m  [1m[35mCREATE INDEX "index_solid_queue_poll_by_queue" ON "solid_queue_ready_executions" ("queue_name", "priority", "job_id") /*application='Grayledger'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "solid_queue_recurring_executions" CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (9.5ms)[0m  [1m[35mCREATE TABLE "solid_queue_recurring_executions" ("id" bigserial primary key, "job_id" bigint NOT NULL, "task_key" character varying NOT NULL, "run_at" timestamp(6) NOT NULL, "created_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (7.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_solid_queue_recurring_executions_on_job_id" ON "solid_queue_recurring_executions" ("job_id") /*application='Grayledger'*/[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_solid_queue_recurring_executions_on_task_key_and_run_at" ON "solid_queue_recurring_executions" ("task_key", "run_at") /*application='Grayledger'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "solid_queue_recurring_tasks" CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (10.8ms)[0m  [1m[35mCREATE TABLE "solid_queue_recurring_tasks" ("id" bigserial primary key, "key" character varying NOT NULL, "schedule" character varying NOT NULL, "command" character varying(2048), "class_name" character varying, "arguments" text, "queue_name" character varying, "priority" integer DEFAULT 0, "static" boolean DEFAULT TRUE NOT NULL, "description" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_solid_queue_recurring_tasks_on_key" ON "solid_queue_recurring_tasks" ("key") /*application='Grayledger'*/[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE INDEX "index_solid_queue_recurring_tasks_on_static" ON "solid_queue_recurring_tasks" ("static") /*application='Grayledger'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "solid_queue_scheduled_executions" CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (10.2ms)[0m  [1m[35mCREATE TABLE "solid_queue_scheduled_executions" ("id" bigserial primary key, "job_id" bigint NOT NULL, "queue_name" character varying NOT NULL, "priority" integer DEFAULT 0 NOT NULL, "scheduled_at" timestamp(6) NOT NULL, "created_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_solid_queue_scheduled_executions_on_job_id" ON "solid_queue_scheduled_executions" ("job_id") /*application='Grayledger'*/[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE INDEX "index_solid_queue_dispatch_all" ON "solid_queue_scheduled_executions" ("scheduled_at", "priority", "job_id") /*application='Grayledger'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "solid_queue_semaphores" CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (11.0ms)[0m  [1m[35mCREATE TABLE "solid_queue_semaphores" ("id" bigserial primary key, "key" character varying NOT NULL, "value" integer DEFAULT 1 NOT NULL, "expires_at" timestamp(6) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (7.5ms)[0m  [1m[35mCREATE INDEX "index_solid_queue_semaphores_on_expires_at" ON "solid_queue_semaphores" ("expires_at") /*application='Grayledger'*/[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE INDEX "index_solid_queue_semaphores_on_key_and_value" ON "solid_queue_semaphores" ("key", "value") /*application='Grayledger'*/[0m
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_solid_queue_semaphores_on_key" ON "solid_queue_semaphores" ("key") /*application='Grayledger'*/[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "solid_queue_blocked_executions" ADD CONSTRAINT "fk_rails_4cd34e2228"
+FOREIGN KEY ("job_id")
+  REFERENCES "solid_queue_jobs" ("id")
+ ON DELETE CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (5.9ms)[0m  [1m[35mALTER TABLE "solid_queue_claimed_executions" ADD CONSTRAINT "fk_rails_9cfe4d4944"
+FOREIGN KEY ("job_id")
+  REFERENCES "solid_queue_jobs" ("id")
+ ON DELETE CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (8.4ms)[0m  [1m[35mALTER TABLE "solid_queue_failed_executions" ADD CONSTRAINT "fk_rails_39bbc7a631"
+FOREIGN KEY ("job_id")
+  REFERENCES "solid_queue_jobs" ("id")
+ ON DELETE CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (8.3ms)[0m  [1m[35mALTER TABLE "solid_queue_ready_executions" ADD CONSTRAINT "fk_rails_81fcbd66af"
+FOREIGN KEY ("job_id")
+  REFERENCES "solid_queue_jobs" ("id")
+ ON DELETE CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (7.9ms)[0m  [1m[35mALTER TABLE "solid_queue_recurring_executions" ADD CONSTRAINT "fk_rails_318a5533ed"
+FOREIGN KEY ("job_id")
+  REFERENCES "solid_queue_jobs" ("id")
+ ON DELETE CASCADE /*application='Grayledger'*/[0m
+  [1m[35m (8.2ms)[0m  [1m[35mALTER TABLE "solid_queue_scheduled_executions" ADD CONSTRAINT "fk_rails_c4316f352d"
+FOREIGN KEY ("job_id")
+  REFERENCES "solid_queue_jobs" ("id")
+ ON DELETE CASCADE /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35m (6.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (1) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Update (5.7ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'fcfd93d395669e99e956b0be6f47f4a798303c69', "updated_at" = '2025-11-21 06:31:28.807248' WHERE "ar_internal_metadata"."key" = 'schema_sha1' /*application='Grayledger'*/[0m
+[ActiveJob]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+[ActiveJob]   [1m[36mSolidQueue::Job Create (1.8ms)[0m  [1m[32mINSERT INTO "solid_queue_jobs" ("queue_name", "class_name", "arguments", "priority", "active_job_id", "scheduled_at", "finished_at", "concurrency_key", "created_at", "updated_at") VALUES ('default', 'TestJob', '{"job_class":"TestJob","job_id":"536d0b01-439a-43e5-bd54-072cab2efb47","provider_job_id":null,"queue_name":"default","priority":null,"arguments":["test","args"],"executions":0,"exception_executions":{},"locale":"en","timezone":"UTC","enqueued_at":"2025-11-21T06:50:32.986287042Z","scheduled_at":"2025-11-21T06:50:32.986113138Z"}', 0, '536d0b01-439a-43e5-bd54-072cab2efb47', '2025-11-21 06:50:32.986113', NULL, NULL, '2025-11-21 06:50:33.021171', '2025-11-21 06:50:33.021171') RETURNING "id" /*application='Grayledger'*/[0m
+[ActiveJob]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1 /*application='Grayledger'*/[0m
+[ActiveJob]   [1m[36mSolidQueue::Job Load (0.6ms)[0m  [1m[34mSELECT "solid_queue_jobs".* FROM "solid_queue_jobs" WHERE "solid_queue_jobs"."id" = 1 LIMIT 1 /*application='Grayledger'*/[0m
+[ActiveJob]   [1m[36mSolidQueue::ReadyExecution Create (1.3ms)[0m  [1m[32mINSERT INTO "solid_queue_ready_executions" ("job_id", "queue_name", "priority", "created_at") VALUES (1, 'default', 0, '2025-11-21 06:50:33.059807') RETURNING "id" /*application='Grayledger'*/[0m
+[ActiveJob]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1 /*application='Grayledger'*/[0m
+[ActiveJob]   [1m[36mTRANSACTION (11.4ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+[ActiveJob] Enqueued TestJob (Job ID: 536d0b01-439a-43e5-bd54-072cab2efb47) to SolidQueue(default) with arguments: "test", "args"
+[ActiveJob] ↳ (grayledger):2:in '<main>'
+  [1m[36mSolidQueue::Job Load (0.6ms)[0m  [1m[34mSELECT "solid_queue_jobs".* FROM "solid_queue_jobs" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Process Create (3.6ms)[0m  [1m[32mINSERT INTO "solid_queue_processes" ("kind", "last_heartbeat_at", "supervisor_id", "pid", "hostname", "metadata", "created_at", "name") VALUES ('Supervisor', '2025-11-21 06:50:55.545023', NULL, 2042959, 'devserv001', NULL, '2025-11-21 06:50:55.581909', 'supervisor-ee7b16e23580fe26b462') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (9.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Register Supervisor (56.5ms)  pid: 2042959, hostname: "devserv001", process_id: 1, name: "supervisor-ee7b16e23580fe26b462"
+  [1m[36mSolidQueue::ClaimedExecution Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "solid_queue_claimed_executions" LEFT OUTER JOIN "solid_queue_processes" ON "solid_queue_processes"."id" = "solid_queue_claimed_executions"."process_id" WHERE "solid_queue_processes"."id" IS NULL LIMIT 1 /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Started Supervisor (92.5ms)  pid: 2042959, hostname: "devserv001", process_id: 1, name: "supervisor-ee7b16e23580fe26b462"
+  [1m[36mSolidQueue::Process Load (0.7ms)[0m  [1m[37mSELECT "solid_queue_processes".* FROM "solid_queue_processes" WHERE "solid_queue_processes"."last_heartbeat_at" <= '2025-11-21 06:45:55.639079' AND "solid_queue_processes"."id" != 1 ORDER BY "solid_queue_processes"."id" ASC LIMIT 50 FOR UPDATE SKIP LOCKED /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Prune dead processes (7.4ms)  size: 0
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Process Create (4.2ms)[0m  [1m[32mINSERT INTO "solid_queue_processes" ("kind", "last_heartbeat_at", "supervisor_id", "pid", "hostname", "metadata", "created_at", "name") VALUES ('Dispatcher', '2025-11-21 06:50:55.634292', 1, 2042981, 'devserv001', '{"polling_interval":1,"batch_size":500,"concurrency_maintenance_interval":600}', '2025-11-21 06:50:55.646051', 'dispatcher-6f6a6ff133dc0aeb49d2') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Process Create (3.9ms)[0m  [1m[32mINSERT INTO "solid_queue_processes" ("kind", "last_heartbeat_at", "supervisor_id", "pid", "hostname", "metadata", "created_at", "name") VALUES ('Worker', '2025-11-21 06:50:55.639185', 1, 2042985, 'devserv001', '{"polling_interval":0.1,"queues":"*","thread_pool_size":3}', '2025-11-21 06:50:55.648801', 'worker-772419203aaedb4075a9') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (7.0ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Register Dispatcher (41.8ms)  pid: 2042981, hostname: "devserv001", process_id: 2, name: "dispatcher-6f6a6ff133dc0aeb49d2"
+SolidQueue-1.2.4 Started Dispatcher (44.5ms)  pid: 2042981, hostname: "devserv001", process_id: 2, name: "dispatcher-6f6a6ff133dc0aeb49d2", polling_interval: 1, batch_size: 500, concurrency_maintenance_interval: 600
+  [1m[36mTRANSACTION (12.0ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Register Worker (42.6ms)  pid: 2042985, hostname: "devserv001", process_id: 3, name: "worker-772419203aaedb4075a9"
+SolidQueue-1.2.4 Started Worker (44.5ms)  pid: 2042985, hostname: "devserv001", process_id: 3, name: "worker-772419203aaedb4075a9", polling_interval: 0.1, queues: "*", thread_pool_size: 3
+  [1m[36mSolidQueue::Semaphore Pluck (1.4ms)[0m  [1m[34mSELECT "solid_queue_semaphores"."id" FROM "solid_queue_semaphores" WHERE "solid_queue_semaphores"."expires_at" < '2025-11-21 06:50:55.683383' ORDER BY "solid_queue_semaphores"."id" ASC LIMIT 500 /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::BlockedExecution Pluck (1.2ms)[0m  [1m[34mSELECT DISTINCT "solid_queue_blocked_executions"."concurrency_key" FROM "solid_queue_blocked_executions" WHERE "solid_queue_blocked_executions"."expires_at" < '2025-11-21 06:50:55.704751' ORDER BY "solid_queue_blocked_executions"."concurrency_key" ASC LIMIT 500 /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Unblock jobs (7.7ms)  limit: 500, size: 0
+  [1m[36mSolidQueue::Job Load (0.3ms)[0m  [1m[34mSELECT "solid_queue_jobs".* FROM "solid_queue_jobs" WHERE "solid_queue_jobs"."id" = 1 LIMIT 1 /*application='Grayledger'*/[0m
+[ActiveJob] [TestJob] [536d0b01-439a-43e5-bd54-072cab2efb47] Performing TestJob (Job ID: 536d0b01-439a-43e5-bd54-072cab2efb47) from SolidQueue(default) enqueued at 2025-11-21T06:50:32.986287042Z with arguments: "test", "args"
+[ActiveJob] [TestJob] [536d0b01-439a-43e5-bd54-072cab2efb47] TestJob executed with args: ["test", "args"]
+[ActiveJob] [TestJob] [536d0b01-439a-43e5-bd54-072cab2efb47] Performed TestJob (Job ID: 536d0b01-439a-43e5-bd54-072cab2efb47) from SolidQueue(default) in 2.6ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger',job='TestJob'*/[0m
+  [1m[36mSolidQueue::Job Update (15.9ms)[0m  [1m[33mUPDATE "solid_queue_jobs" SET "updated_at" = '2025-11-21 06:50:55.840262', "finished_at" = '2025-11-21 06:50:55.840262' WHERE "solid_queue_jobs"."id" = 1 /*application='Grayledger',job='TestJob'*/[0m
+  [1m[36mSolidQueue::ClaimedExecution Destroy (0.7ms)[0m  [1m[31mDELETE FROM "solid_queue_claimed_executions" WHERE "solid_queue_claimed_executions"."id" = 1 /*application='Grayledger',job='TestJob'*/[0m
+  [1m[36mTRANSACTION (5.3ms)[0m  [1m[35mCOMMIT /*application='Grayledger',job='TestJob'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Process Destroy (5.6ms)[0m  [1m[31mDELETE FROM "solid_queue_processes" WHERE "solid_queue_processes"."id" = 2 /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Process Destroy (15.2ms)[0m  [1m[31mDELETE FROM "solid_queue_processes" WHERE "solid_queue_processes"."id" = 3 /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::ClaimedExecution Load (0.5ms)[0m  [1m[34mSELECT "solid_queue_claimed_executions".* FROM "solid_queue_claimed_executions" WHERE "solid_queue_claimed_executions"."process_id" = 3 /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Release claimed jobs (12.8ms)  size: 0
+  [1m[36mTRANSACTION (8.8ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Deregister Worker (48.4ms)  process_id: 3, pid: 2042985, hostname: "devserv001", name: "worker-772419203aaedb4075a9", last_heartbeat_at: "2025-11-21T06:50:55Z", claimed_size: nil, pruned: false
+SolidQueue-1.2.4 Shutdown Worker (50.3ms)  pid: 2042985, hostname: "devserv001", process_id: 3, name: "worker-772419203aaedb4075a9", polling_interval: 0.1, queues: "*", thread_pool_size: 3
+  [1m[36mTRANSACTION (3.1ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Deregister Dispatcher (76.8ms)  process_id: 2, pid: 2042981, hostname: "devserv001", name: "dispatcher-6f6a6ff133dc0aeb49d2", last_heartbeat_at: "2025-11-21T06:50:55Z", claimed_size: nil, pruned: false
+SolidQueue-1.2.4 Shutdown Dispatcher (77.8ms)  pid: 2042981, hostname: "devserv001", process_id: 2, name: "dispatcher-6f6a6ff133dc0aeb49d2", polling_interval: 1, batch_size: 500, concurrency_maintenance_interval: 600
+SolidQueue-1.2.4 Supervisor terminated gracefully (203.1ms)  process_id: 1, supervisor_pid: 2042959, supervised_processes: [2042981, 2042985]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Process Destroy (5.8ms)[0m  [1m[31mDELETE FROM "solid_queue_processes" WHERE "solid_queue_processes"."id" = 1 /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (8.7ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Process Load (0.7ms)[0m  [1m[34mSELECT "solid_queue_processes".* FROM "solid_queue_processes" WHERE "solid_queue_processes"."supervisor_id" = 1 /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Deregister Supervisor (35.1ms)  process_id: 1, pid: 2042959, hostname: "devserv001", name: "supervisor-ee7b16e23580fe26b462", last_heartbeat_at: "2025-11-21T06:50:55Z", claimed_size: nil, pruned: false
+SolidQueue-1.2.4 Shutdown Supervisor (36.4ms)  pid: 2042959, hostname: "devserv001", process_id: 1, name: "supervisor-ee7b16e23580fe26b462"
+  [1m[36mSolidQueue::Job Load (13.8ms)[0m  [1m[34mSELECT "solid_queue_jobs".* FROM "solid_queue_jobs" /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mInvoiceItem Create (2.3ms)[0m  [1m[32mINSERT INTO "invoice_items" ("amount_cents", "amount_currency", "created_at", "updated_at") VALUES (7500, 'USD', '2025-11-21 07:13:31.629135', '2025-11-21 07:13:31.629135') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (11.7ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mInvoiceItem Load (0.7ms)[0m  [1m[34mSELECT "invoice_items".* FROM "invoice_items" WHERE "invoice_items"."id" = 1 LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+[ActiveJob]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+[ActiveJob]   [1m[36mSolidQueue::Job Create (3.7ms)[0m  [1m[32mINSERT INTO "solid_queue_jobs" ("queue_name", "class_name", "arguments", "priority", "active_job_id", "scheduled_at", "finished_at", "concurrency_key", "created_at", "updated_at") VALUES ('default', 'TestJob', '{"job_class":"TestJob","job_id":"c9671bc1-74d9-4c8d-8149-0f5ee5036e25","provider_job_id":null,"queue_name":"default","priority":null,"arguments":["test-arg"],"executions":0,"exception_executions":{},"locale":"en","timezone":"UTC","enqueued_at":"2025-11-21T07:14:02.855200290Z","scheduled_at":"2025-11-21T07:14:02.855032511Z"}', 0, 'c9671bc1-74d9-4c8d-8149-0f5ee5036e25', '2025-11-21 07:14:02.855032', NULL, NULL, '2025-11-21 07:14:02.890953', '2025-11-21 07:14:02.890953') RETURNING "id" /*application='Grayledger'*/[0m
+[ActiveJob]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1 /*application='Grayledger'*/[0m
+[ActiveJob]   [1m[36mSolidQueue::Job Load (0.7ms)[0m  [1m[34mSELECT "solid_queue_jobs".* FROM "solid_queue_jobs" WHERE "solid_queue_jobs"."id" = 2 LIMIT 1 /*application='Grayledger'*/[0m
+[ActiveJob]   [1m[36mSolidQueue::ReadyExecution Create (0.9ms)[0m  [1m[32mINSERT INTO "solid_queue_ready_executions" ("job_id", "queue_name", "priority", "created_at") VALUES (2, 'default', 0, '2025-11-21 07:14:02.926318') RETURNING "id" /*application='Grayledger'*/[0m
+[ActiveJob]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1 /*application='Grayledger'*/[0m
+[ActiveJob]   [1m[36mTRANSACTION (9.7ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+[ActiveJob] Enqueued TestJob (Job ID: c9671bc1-74d9-4c8d-8149-0f5ee5036e25) to SolidQueue(default) with arguments: "test-arg"
+  [1m[36mSolidQueue::Job Load (1.1ms)[0m  [1m[34mSELECT "solid_queue_jobs".* FROM "solid_queue_jobs" ORDER BY "solid_queue_jobs"."id" DESC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Process Create (3.5ms)[0m  [1m[32mINSERT INTO "solid_queue_processes" ("kind", "last_heartbeat_at", "supervisor_id", "pid", "hostname", "metadata", "created_at", "name") VALUES ('Supervisor', '2025-11-21 07:14:15.416310', NULL, 2049335, 'devserv001', NULL, '2025-11-21 07:14:15.453497', 'supervisor-593055d66530c2ff19ab') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (10.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Register Supervisor (59.7ms)  pid: 2049335, hostname: "devserv001", process_id: 4, name: "supervisor-593055d66530c2ff19ab"
+  [1m[36mSolidQueue::ClaimedExecution Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "solid_queue_claimed_executions" LEFT OUTER JOIN "solid_queue_processes" ON "solid_queue_processes"."id" = "solid_queue_claimed_executions"."process_id" WHERE "solid_queue_processes"."id" IS NULL LIMIT 1 /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Started Supervisor (87.4ms)  pid: 2049335, hostname: "devserv001", process_id: 4, name: "supervisor-593055d66530c2ff19ab"
+  [1m[36mSolidQueue::Process Load (0.9ms)[0m  [1m[37mSELECT "solid_queue_processes".* FROM "solid_queue_processes" WHERE "solid_queue_processes"."last_heartbeat_at" <= '2025-11-21 07:09:15.506984' AND "solid_queue_processes"."id" != 4 ORDER BY "solid_queue_processes"."id" ASC LIMIT 50 FOR UPDATE SKIP LOCKED /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Prune dead processes (7.5ms)  size: 0
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Process Create (5.2ms)[0m  [1m[32mINSERT INTO "solid_queue_processes" ("kind", "last_heartbeat_at", "supervisor_id", "pid", "hostname", "metadata", "created_at", "name") VALUES ('Dispatcher', '2025-11-21 07:14:15.502874', 4, 2049389, 'devserv001', '{"polling_interval":1,"batch_size":500,"concurrency_maintenance_interval":600}', '2025-11-21 07:14:15.508986', 'dispatcher-b9a127f35f83bf65018c') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Process Create (4.8ms)[0m  [1m[32mINSERT INTO "solid_queue_processes" ("kind", "last_heartbeat_at", "supervisor_id", "pid", "hostname", "metadata", "created_at", "name") VALUES ('Worker', '2025-11-21 07:14:15.506977', 4, 2049393, 'devserv001', '{"polling_interval":0.1,"queues":"*","thread_pool_size":3}', '2025-11-21 07:14:15.512896', 'worker-d501a9409533c2bc7618') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (5.3ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (5.3ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Register Worker (38.5ms)  pid: 2049393, hostname: "devserv001", process_id: 6, name: "worker-d501a9409533c2bc7618"
+SolidQueue-1.2.4 Started Worker (40.9ms)  pid: 2049393, hostname: "devserv001", process_id: 6, name: "worker-d501a9409533c2bc7618", polling_interval: 0.1, queues: "*", thread_pool_size: 3
+SolidQueue-1.2.4 Register Dispatcher (44.6ms)  pid: 2049389, hostname: "devserv001", process_id: 5, name: "dispatcher-b9a127f35f83bf65018c"
+SolidQueue-1.2.4 Started Dispatcher (47.9ms)  pid: 2049389, hostname: "devserv001", process_id: 5, name: "dispatcher-b9a127f35f83bf65018c", polling_interval: 1, batch_size: 500, concurrency_maintenance_interval: 600
+  [1m[36mSolidQueue::Semaphore Pluck (1.3ms)[0m  [1m[34mSELECT "solid_queue_semaphores"."id" FROM "solid_queue_semaphores" WHERE "solid_queue_semaphores"."expires_at" < '2025-11-21 07:14:15.553915' ORDER BY "solid_queue_semaphores"."id" ASC LIMIT 500 /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::BlockedExecution Pluck (0.9ms)[0m  [1m[34mSELECT DISTINCT "solid_queue_blocked_executions"."concurrency_key" FROM "solid_queue_blocked_executions" WHERE "solid_queue_blocked_executions"."expires_at" < '2025-11-21 07:14:15.577995' ORDER BY "solid_queue_blocked_executions"."concurrency_key" ASC LIMIT 500 /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Unblock jobs (11.0ms)  limit: 500, size: 0
+  [1m[36mSolidQueue::Job Load (0.3ms)[0m  [1m[34mSELECT "solid_queue_jobs".* FROM "solid_queue_jobs" WHERE "solid_queue_jobs"."id" = 2 LIMIT 1 /*application='Grayledger'*/[0m
+[ActiveJob] [TestJob] [c9671bc1-74d9-4c8d-8149-0f5ee5036e25] Performing TestJob (Job ID: c9671bc1-74d9-4c8d-8149-0f5ee5036e25) from SolidQueue(default) enqueued at 2025-11-21T07:14:02.855200290Z with arguments: "test-arg"
+[ActiveJob] [TestJob] [c9671bc1-74d9-4c8d-8149-0f5ee5036e25] TestJob executed with args: ["test-arg"]
+[ActiveJob] [TestJob] [c9671bc1-74d9-4c8d-8149-0f5ee5036e25] Performed TestJob (Job ID: c9671bc1-74d9-4c8d-8149-0f5ee5036e25) from SolidQueue(default) in 1.87ms
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger',job='TestJob'*/[0m
+  [1m[36mSolidQueue::Job Update (2.8ms)[0m  [1m[33mUPDATE "solid_queue_jobs" SET "updated_at" = '2025-11-21 07:14:15.647104', "finished_at" = '2025-11-21 07:14:15.647104' WHERE "solid_queue_jobs"."id" = 2 /*application='Grayledger',job='TestJob'*/[0m
+  [1m[36mSolidQueue::ClaimedExecution Destroy (0.2ms)[0m  [1m[31mDELETE FROM "solid_queue_claimed_executions" WHERE "solid_queue_claimed_executions"."id" = 2 /*application='Grayledger',job='TestJob'*/[0m
+  [1m[36mTRANSACTION (6.6ms)[0m  [1m[35mCOMMIT /*application='Grayledger',job='TestJob'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Process Destroy (5.2ms)[0m  [1m[31mDELETE FROM "solid_queue_processes" WHERE "solid_queue_processes"."id" = 6 /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Process Destroy (7.0ms)[0m  [1m[31mDELETE FROM "solid_queue_processes" WHERE "solid_queue_processes"."id" = 5 /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::ClaimedExecution Load (0.3ms)[0m  [1m[34mSELECT "solid_queue_claimed_executions".* FROM "solid_queue_claimed_executions" WHERE "solid_queue_claimed_executions"."process_id" = 6 /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Release claimed jobs (5.2ms)  size: 0
+  [1m[36mTRANSACTION (7.2ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Deregister Dispatcher (23.8ms)  process_id: 5, pid: 2049389, hostname: "devserv001", name: "dispatcher-b9a127f35f83bf65018c", last_heartbeat_at: "2025-11-21T07:14:15Z", claimed_size: nil, pruned: false
+SolidQueue-1.2.4 Shutdown Dispatcher (24.7ms)  pid: 2049389, hostname: "devserv001", process_id: 5, name: "dispatcher-b9a127f35f83bf65018c", polling_interval: 1, batch_size: 500, concurrency_maintenance_interval: 600
+  [1m[36mTRANSACTION (6.7ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Deregister Worker (28.3ms)  process_id: 6, pid: 2049393, hostname: "devserv001", name: "worker-d501a9409533c2bc7618", last_heartbeat_at: "2025-11-21T07:14:15Z", claimed_size: nil, pruned: false
+SolidQueue-1.2.4 Shutdown Worker (29.6ms)  pid: 2049393, hostname: "devserv001", process_id: 6, name: "worker-d501a9409533c2bc7618", polling_interval: 0.1, queues: "*", thread_pool_size: 3
+SolidQueue-1.2.4 Supervisor terminated gracefully (101.3ms)  process_id: 4, supervisor_pid: 2049335, supervised_processes: [2049389, 2049393]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Process Destroy (4.2ms)[0m  [1m[31mDELETE FROM "solid_queue_processes" WHERE "solid_queue_processes"."id" = 4 /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (86.4ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Process Load (0.7ms)[0m  [1m[34mSELECT "solid_queue_processes".* FROM "solid_queue_processes" WHERE "solid_queue_processes"."supervisor_id" = 4 /*application='Grayledger'*/[0m
+SolidQueue-1.2.4 Deregister Supervisor (110.3ms)  process_id: 4, pid: 2049335, hostname: "devserv001", name: "supervisor-593055d66530c2ff19ab", last_heartbeat_at: "2025-11-21T07:14:15Z", claimed_size: nil, pruned: false
+SolidQueue-1.2.4 Shutdown Supervisor (111.2ms)  pid: 2049335, hostname: "devserv001", process_id: 4, name: "supervisor-593055d66530c2ff19ab"
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mInvoiceItem Create (1.3ms)[0m  [1m[32mINSERT INTO "invoice_items" ("amount_cents", "amount_currency", "created_at", "updated_at") VALUES (99999, 'USD', '2025-11-21 07:14:24.210968', '2025-11-21 07:14:24.210968') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (11.4ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mInvoiceItem Load (0.5ms)[0m  [1m[34mSELECT "invoice_items".* FROM "invoice_items" WHERE "invoice_items"."id" = 2 LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Job Load (1.5ms)[0m  [1m[34mSELECT "solid_queue_jobs".* FROM "solid_queue_jobs" WHERE "solid_queue_jobs"."class_name" = 'TestJob' ORDER BY "solid_queue_jobs"."id" DESC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Job Count (1.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "solid_queue_jobs" /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Job Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "solid_queue_jobs" WHERE "solid_queue_jobs"."finished_at" IS NOT NULL /*application='Grayledger'*/[0m
+  [1m[36mSolidQueue::Job Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "solid_queue_jobs" WHERE "solid_queue_jobs"."class_name" = 'TestJob' AND "solid_queue_jobs"."finished_at" IS NOT NULL /*application='Grayledger'*/[0m

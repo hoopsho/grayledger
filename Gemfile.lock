@@ -79,6 +79,7 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.3)
     base64 (0.3.0)
+    bcrypt (3.1.20)
     bcrypt_pbkdf (1.1.1)
     bigdecimal (3.3.1)
     bindex (0.8.1)
@@ -171,6 +172,25 @@ GEM
       logger
     mini_mime (1.1.5)
     minitest (5.26.2)
+    mission_control-jobs (1.1.0)
+      actioncable (>= 7.1)
+      actionpack (>= 7.1)
+      activejob (>= 7.1)
+      activerecord (>= 7.1)
+      importmap-rails (>= 1.2.1)
+      irb (~> 1.13)
+      railties (>= 7.1)
+      stimulus-rails
+      turbo-rails
+    monetize (1.13.0)
+      money (~> 6.12)
+    money (6.19.0)
+      i18n (>= 0.6.4, <= 2)
+    money-rails (1.15.0)
+      activesupport (>= 3.0)
+      monetize (~> 1.9)
+      money (~> 6.13)
+      railties (>= 3.0)
     msgpack (1.8.0)
     net-imap (0.5.12)
       date
@@ -200,6 +220,7 @@ GEM
     nokogiri (1.18.10-x86_64-linux-musl)
       racc (~> 1.4)
     ostruct (0.6.3)
+    pagy (9.4.0)
     parallel (1.27.0)
     parser (3.3.10.0)
       ast (~> 2.4.1)
@@ -223,6 +244,8 @@ GEM
     public_suffix (6.0.2)
     puma (7.1.0)
       nio4r (~> 2.0)
+    pundit (2.5.2)
+      activesupport (>= 3.0.0)
     raabro (1.4.0)
     racc (1.8.1)
     rack (3.2.4)
@@ -387,6 +410,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap
   brakeman
   bundler-audit
@@ -396,9 +420,13 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kamal
+  mission_control-jobs
+  money-rails
+  pagy (~> 9.4)
   pg (~> 1.1)
   propshaft
   puma (>= 5.0)
+  pundit (~> 2.4)
   rails (~> 8.1.1)
   rubocop-rails-omakase
   selenium-webdriver

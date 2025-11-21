@@ -2,8 +2,8 @@
 
 **Source:** [ADR 01.001](../docs/adrs/01.foundation/01.001.rails-8-minimal-stack.md) | [PRD](./prd-from-adr-01.001.md)
 **Feature Branch:** `feature/adr-01.001-rails-8-minimal-stack`
-**Status:** Not Started
-**Progress:** 0/25 tasks complete (0%)
+**Status:** In Progress - Wave 2 Complete
+**Progress:** 7/25 tasks complete (28%)
 
 ---
 
@@ -85,9 +85,11 @@
 **Goal:** Install essential gems and configure core functionality
 
 ### TASK-2.1: Install and Configure Solid Queue
-- **Status:** [ ] pending
+- **Status:** [x] DONE
 - **Dependencies:** TASK-1.2 (needs database)
 - **Blocks:** TASK-6.2
+- **Completed:** 2025-11-21
+- **Notes:** solid_queue 1.2.4 + mission_control-jobs 1.1.0, 11 tables migrated, TestJob verified, Mission Control at /jobs
 - **Acceptance Criteria:**
   - solid_queue gem installed
   - mission_control-jobs gem installed
@@ -102,9 +104,11 @@
   - `config/routes.rb` (Mission Control mount)
 
 ### TASK-2.2: Install Pundit and Pagy
-- **Status:** [ ] pending
+- **Status:** [x] DONE
 - **Dependencies:** TASK-1.2 (needs Rails foundation)
 - **Blocks:** None (used in future ADRs)
+- **Completed:** 2025-11-21
+- **Notes:** pundit 2.5.2 + pagy 9.4.0, ApplicationPolicy secure-by-default, 34 tests passing (PostPolicy + UserPolicy examples)
 - **Acceptance Criteria:**
   - pundit gem installed
   - pagy gem installed
@@ -119,9 +123,11 @@
   - `app/controllers/application_controller.rb`
 
 ### TASK-2.3: Install money-rails
-- **Status:** [ ] pending
+- **Status:** [x] DONE
 - **Dependencies:** TASK-1.2 (needs database)
 - **Blocks:** TASK-7.1 (money-rails testing)
+- **Completed:** 2025-11-21
+- **Notes:** money-rails 1.15.0 + money 6.19.0, USD default, banker's rounding, InvoiceItem test model, 11 tests passing, Rails 8 compatible
 - **Acceptance Criteria:**
   - money-rails gem installed
   - Money initializer configured
@@ -555,14 +561,14 @@
 ## Summary Statistics
 
 - **Total Tasks:** 25
-- **Completed:** 4
+- **Completed:** 7
 - **In Progress:** 0
-- **Pending:** 21
+- **Pending:** 18
 - **Blocked:** 0
 
 **Progress by Wave:**
 - Wave 1 (Foundation): 4/4 complete (100%) ✓
-- Wave 2 (Core Gems): 0/3 complete (0%)
+- Wave 2 (Core Gems): 3/3 complete (100%) ✓
 - Wave 3 (Testing): 0/6 complete (0%)
 - Wave 4 (Security): 0/5 complete (0%)
 - Wave 5 (Caching): 0/5 complete (0%)
@@ -628,5 +634,5 @@ Wave 8 (Final)
 ---
 
 **Last Updated:** 2025-11-21
-**Status:** Ready for implementation
-**Next Step:** Begin Wave 1 (Foundation) - TASK-1.1
+**Status:** Wave 2 Complete - Moving to Wave 3
+**Next Step:** Begin Wave 3 (Testing Infrastructure) - All 6 tasks ready
