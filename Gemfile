@@ -56,7 +56,7 @@ gem "pundit", "~> 2.4"
 
 # Pagination - fastest pagination gem [https://github.com/ddnexus/pagy]
 # TASK-2.2: Pagy for high-performance pagination
-gem "pagy", "~> 9.4"
+gem "pagy", "~> 43.1"
 
 # Rate limiting and security hardening [https://github.com/rack/rack-attack]
 # TASK-4.1: Rack::Attack for DDoS protection and rate limiting
