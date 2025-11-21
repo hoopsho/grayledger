@@ -12,5 +12,6 @@ test:
   <<: *default
 
 production:
-  database: cache
+  # Single database configuration: Solid Cache uses primary database
+  # No separate database needed - all Solid gems share the same PostgreSQL instance
   <<: *default

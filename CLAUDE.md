@@ -4,15 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Active Feature
 
-**✅ COMPLETE - READY FOR PR**
+**IN PROGRESS**
 
-- **Feature:** Rails 8 Minimal Stack (ADR 01.001)
-- **Branch:** `feature/adr-01.001-rails-8-minimal-stack`
-- **PRD:** [dev/prd-from-adr-01.001.md](dev/prd-from-adr-01.001.md)
+- **Feature:** Heroku Deployment with PostgreSQL + pgvector (ADR 01.002)
+- **Branch:** `feature/adr-01.002-heroku-postgres-pgvector`
+- **PRD:** [dev/prd-from-adr-01.002.md](dev/prd-from-adr-01.002.md)
 - **Tasks:** [dev/TASKS.md](dev/TASKS.md)
-- **Status:** 100% Complete - All 25 tasks done, 329 tests passing
-- **Verification:** [dev/wave-8-goals-verification.md](dev/wave-8-goals-verification.md)
-- **Next:** Create PR and merge to main
+- **Status:** 39% Complete - 7/18 tasks done
+- **Next:** Complete Wave 2 tasks (Heroku Configuration)
+
+**Previous Feature (COMPLETE):**
+- Rails 8 Minimal Stack (ADR 01.001) - [Tasks](dev/TASKS-01.001.md) - 100% Complete, 329 tests passing
 
 ## Project Overview
 

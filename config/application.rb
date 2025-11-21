@@ -26,5 +26,10 @@ module Grayledger
 
     # TASK-4.1: Add Rack::Attack middleware for rate limiting
     config.middleware.use Rack::Attack
+
+    # TASK-1.4: Disable schema dumping for non-primary databases
+    # We use a single database for all Solid Queue, Cable, and Cache tables,
+    # so we only need schema.rb, not separate schema files for cache_schema.rb, etc.
+    config.active_record.dump_schemas = :primary
   end
 end

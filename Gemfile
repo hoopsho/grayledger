@@ -6,6 +6,9 @@ gem "rails", "~> 8.1.1"
 gem "propshaft"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
+# pgvector - Vector database support for PostgreSQL [https://github.com/pgvector/pgvector-ruby]
+# Required for AI embeddings and similarity search [ADR-06.001]
+gem "pgvector", "~> 0.3"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -45,6 +48,10 @@ gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
+
+# AWS SDK for S3 - Active Storage S3 support [https://github.com/aws/aws-sdk-ruby]
+# TASK-2.4: AWS SDK for S3 support with Active Storage
+gem "aws-sdk-s3", require: false
 
 # Money value objects for currency handling [ADR-01.001]
 # NOTE: Last release 2021, testing Rails 8 compatibility

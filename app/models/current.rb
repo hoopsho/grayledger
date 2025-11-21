@@ -35,7 +35,7 @@ class Current < ActiveSupport::CurrentAttributes
     override = class_variable_get(:@@duration_ms_override)[Thread.current.object_id]
     if override.present?
       override
-    elsif request_started_at.present? && Time.current
+    elsif request_started_at.present?
       ((Time.current - request_started_at) * 1000).round(2)
     end
   end
@@ -48,11 +48,11 @@ class Current < ActiveSupport::CurrentAttributes
   end
 
   def self.db_time_ms
-    (db_start_time && Time.current) ? ((Time.current - db_start_time) * 1000).round(2) : nil
+    db_start_time.present? ? ((Time.current - db_start_time) * 1000).round(2) : nil
   end
 
   def self.view_time_ms
-    (view_start_time && Time.current) ? ((Time.current - view_start_time) * 1000).round(2) : nil
+    view_start_time.present? ? ((Time.current - view_start_time) * 1000).round(2) : nil
   end
 
   # Override reset to also clear duration_ms overrides for this thread
