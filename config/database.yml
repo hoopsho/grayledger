@@ -19,17 +19,13 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+# Single database configuration for development, test, and production
+# All Solid gems (Queue, Cache, Cable) use the primary database
+# This simplifies configuration and reduces operational overhead
 
 development:
-  primary: &primary_development
-    <<: *default
-    database: grayledger_development
-  cache:
-    <<: *primary_development
-  queue:
-    <<: *primary_development
-  cable:
-    <<: *primary_development
+  <<: *default
+  database: grayledger_development
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -62,15 +58,8 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  primary: &primary_test
-    <<: *default
-    database: grayledger_test
-  cache:
-    <<: *primary_test
-  queue:
-    <<: *primary_test
-  cable:
-    <<: *primary_test
+  <<: *default
+  database: grayledger_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -99,20 +88,14 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  primary: &primary_production
-    <<: *default
-    database: grayledger_production
-    username: grayledger
-    password: <%= ENV["GRAYLEDGER_DATABASE_PASSWORD"] %>
-  cache:
-    <<: *primary_production
-    database: grayledger_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: grayledger_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: grayledger_production_cable
-    migrations_paths: db/cable_migrate
+  # Production uses Heroku's auto-provisioned DATABASE_URL environment variable.
+  # This simplifies configuration and ensures all services (primary, cache, queue, cable)
+  # use the same PostgreSQL database instance.
+  #
+  # Heroku automatically sets DATABASE_URL when you provision a Postgres add-on.
+  # Example format: postgres://user:password@host:port/database
+  #
+  # Connection pooling is configured per RAILS_MAX_THREADS environment variable,
+  # which Heroku sets based on dyno type. Override if needed for your workload.
+  url: <%= ENV['DATABASE_URL'] %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
