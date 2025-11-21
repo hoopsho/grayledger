@@ -3,7 +3,7 @@
 **Source:** [ADR 01.001](../docs/adrs/01.foundation/01.001.rails-8-minimal-stack.md) | [PRD](./prd-from-adr-01.001.md)
 **Feature Branch:** `feature/adr-01.001-rails-8-minimal-stack`
 **Status:** In Progress - Wave 4 Complete
-**Progress:** 18/25 tasks complete (72%)
+**Progress:** 19/25 tasks complete (76%)
 
 ---
 
@@ -159,7 +159,36 @@
 - **Status:** [ ] pending
 
 ### TASK-5.2: Implement Russian Doll Caching Patterns
-- **Status:** [ ] pending
+- **Status:** [x] DONE (2025-11-21)
+- **Dependencies:** None (infrastructure, no dependencies on actual models)
+- **Notes:** Russian doll caching infrastructure implemented with helper methods and example concern for future use. Cache invalidation via touch: true cascading explained.
+- **Files Created:**
+  - `/home/cjm/work/grayledger/app/helpers/cache_helper.rb` with 4 methods:
+    - `nested_cache_key(record, *suffixes)` - Single record cache keys
+    - `collection_cache_key(collection, prefix)` - Collection cache keys with auto-invalidation
+    - `composite_cache_key(identifier, *dependencies)` - Multi-model composite keys
+    - `conditional_cache(cache_key, &block)` - Environment-aware caching
+  - `/home/cjm/work/grayledger/app/models/concerns/cacheable.rb` with:
+    - `touch: true` pattern documentation
+    - `cache_dependencies` class method
+    - `cached_children` instance method
+    - `bust_cache!` for manual invalidation
+    - `cache_version` and `updated_since?` utilities
+  - `/home/cjm/work/grayledger/docs/caching-patterns.md` comprehensive guide:
+    - Russian doll caching explanation with diagrams
+    - Fragment caching examples (single, collection, composite)
+    - Cache key generation reference
+    - Cache invalidation strategy
+    - Best practices and anti-patterns
+    - Testing patterns
+    - Performance monitoring guidelines
+    - Common pitfalls table
+- **Acceptance Criteria:**
+  - Russian doll cache key helpers implemented ✓
+  - Cacheable concern with touch: true documentation ✓
+  - Comprehensive caching patterns documentation ✓
+  - Code examples for all patterns ✓
+  - Ready for use when models are created ✓
 
 ### TASK-5.3: Add Fragment Caching for Expensive Operations
 - **Status:** [ ] pending
@@ -223,9 +252,9 @@
 ## Summary Statistics
 
 - **Total Tasks:** 25
-- **Completed:** 18
+- **Completed:** 19
 - **In Progress:** 0
-- **Pending:** 7
+- **Pending:** 6
 - **Blocked:** 0
 
 **Progress by Wave:**
@@ -233,7 +262,7 @@
 - Wave 2 (Core Gems): 3/3 complete (100%) ✓
 - Wave 3 (Testing): 6/6 complete (100%) ✓
 - Wave 4 (Security): 5/5 complete (100%) ✓
-- Wave 5 (Caching): 0/5 complete (0%)
+- Wave 5 (Caching): 1/5 complete (20%)
 - Wave 6 (Observability): 0/5 complete (0%)
 - Wave 7 (Validation): 0/2 complete (0%)
 - Wave 8 (Final): 0/3 complete (0%)
@@ -241,5 +270,5 @@
 ---
 
 **Last Updated:** 2025-11-21
-**Status:** Wave 4 COMPLETE! All security hardening and rate limiting tasks done.
-**Next Step:** Wave 5 - TASK-5.1 Install and Configure Solid Cache
+**Status:** Wave 5 In Progress - TASK-5.2 COMPLETE!
+**Next Step:** Wave 5 - TASK-5.1 Install and Configure Solid Cache (can be done before or after TASK-5.2)
