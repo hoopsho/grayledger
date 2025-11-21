@@ -3,7 +3,7 @@
 **Source:** [ADR 01.001](../docs/adrs/01.foundation/01.001.rails-8-minimal-stack.md) | [PRD](./prd-from-adr-01.001.md)
 **Feature Branch:** `feature/adr-01.001-rails-8-minimal-stack`
 **Status:** In Progress - Wave 4 Complete
-**Progress:** 17/25 tasks complete (68%)
+**Progress:** 18/25 tasks complete (72%)
 
 ---
 
@@ -140,9 +140,14 @@
   - `/home/cjm/work/grayledger/config/initializers/rack_attack.rb` ✓
 
 ### TASK-4.5: Configure Rack::Attack Logging
-- **Status:** [ ] pending
+- **Status:** [x] DONE (2025-11-21)
 - **Dependencies:** TASK-4.1
-- **Notes:** Logging already implemented in rack_attack.rb initializer with ActiveSupport::Notifications subscriptions for throttle and blocklist events
+- **Notes:** Comprehensive logging implemented with dedicated rack_attack.log, daily rotation (10MB limit), structured JSON format, ActiveSupport::Notifications subscriptions for throttle/safelist/blocklist events, optional MetricsTracker integration, 11 tests passing
+- **Acceptance Criteria:**
+  - Throttled requests logged to rack_attack.log ✓
+  - Log format includes IP, endpoint, throttle name ✓
+  - Log rotation configured ✓
+  - Throttle count tracked as metric ✓
 
 ---
 
@@ -218,16 +223,16 @@
 ## Summary Statistics
 
 - **Total Tasks:** 25
-- **Completed:** 17
+- **Completed:** 18
 - **In Progress:** 0
-- **Pending:** 8
+- **Pending:** 7
 - **Blocked:** 0
 
 **Progress by Wave:**
 - Wave 1 (Foundation): 4/4 complete (100%) ✓
 - Wave 2 (Core Gems): 3/3 complete (100%) ✓
 - Wave 3 (Testing): 6/6 complete (100%) ✓
-- Wave 4 (Security): 4/5 complete (80%) ✓
+- Wave 4 (Security): 5/5 complete (100%) ✓
 - Wave 5 (Caching): 0/5 complete (0%)
 - Wave 6 (Observability): 0/5 complete (0%)
 - Wave 7 (Validation): 0/2 complete (0%)
@@ -236,5 +241,5 @@
 ---
 
 **Last Updated:** 2025-11-21
-**Status:** Wave 4 Complete - Rate Limiting Integration Tests Complete
-**Next Step:** TASK-4.5 - Configure Rack::Attack Logging (or TASK-5.1 to proceed to next wave)
+**Status:** Wave 4 COMPLETE! All security hardening and rate limiting tasks done.
+**Next Step:** Wave 5 - TASK-5.1 Install and Configure Solid Cache
