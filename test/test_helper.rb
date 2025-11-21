@@ -1,6 +1,13 @@
+# SimpleCov coverage tracking must be started FIRST, before Rails loads [TASK-3.3]
+require "simplecov"
+SimpleCov.start
+
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
+
+# Load VCR configuration for HTTP request recording [TASK-3.2]
+require "support/vcr"
 
 module ActiveSupport
   class TestCase

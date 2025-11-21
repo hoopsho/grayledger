@@ -2,8 +2,8 @@
 
 **Source:** [ADR 01.001](../docs/adrs/01.foundation/01.001.rails-8-minimal-stack.md) | [PRD](./prd-from-adr-01.001.md)
 **Feature Branch:** `feature/adr-01.001-rails-8-minimal-stack`
-**Status:** In Progress - Wave 2 Complete
-**Progress:** 7/25 tasks complete (28%)
+**Status:** In Progress - Wave 3 Complete
+**Progress:** 13/25 tasks complete (52%)
 
 ---
 
@@ -145,89 +145,101 @@
 **Goal:** Comprehensive test framework with CI/CD
 
 ### TASK-3.1: Configure Minitest and Fixtures
-- **Status:** [ ] pending
+- **Status:** [x] DONE
 - **Dependencies:** TASK-1.1 (needs Rails)
 - **Blocks:** All testing tasks
+- **Completed:** 2025-11-21
+- **Notes:** Minitest configured with parallel execution, fixtures auto-loading, all test directories created with .keep files, 59 tests passing
 - **Acceptance Criteria:**
-  - Minitest configured (Rails default)
-  - Fixtures directory structure created
-  - test_helper.rb configured
-  - Sample test passes
+  - Minitest configured (Rails default) ✓
+  - Fixtures directory structure created ✓
+  - test_helper.rb configured ✓
+  - Sample test passes ✓
 - **Files to Create:**
-  - `test/fixtures/.keep`
-  - `test/models/.keep`
-  - `test/controllers/.keep`
-  - `test/integration/.keep`
-  - `test/system/.keep`
+  - `test/fixtures/.keep` ✓
+  - `test/models/.keep` ✓
+  - `test/controllers/.keep` ✓
+  - `test/integration/.keep` ✓
+  - `test/system/.keep` ✓
 - **Files to Modify:**
-  - `test/test_helper.rb`
+  - `test/test_helper.rb` ✓
 
 ### TASK-3.2: Install VCR and WebMock
-- **Status:** [ ] pending
+- **Status:** [x] DONE
 - **Dependencies:** TASK-3.1 (needs test framework)
 - **Blocks:** TASK-3.6 (external API testing)
+- **Completed:** 2025-11-21
+- **Notes:** VCR 6.3.1 + WebMock 3.26.1 installed, cassettes configured with :once recording mode, 3 sample tests passing, 2 cassettes created
 - **Acceptance Criteria:**
-  - vcr gem installed
-  - webmock gem installed
-  - VCR configured in test_helper
-  - Cassettes directory created
-  - Sample VCR cassette works
+  - vcr gem installed ✓
+  - webmock gem installed ✓
+  - VCR configured in test_helper ✓
+  - Cassettes directory created ✓
+  - Sample VCR cassette works ✓
 - **Files to Create:**
-  - `test/vcr_cassettes/.gitkeep`
-  - `test/support/vcr.rb`
+  - `test/vcr_cassettes/.gitkeep` ✓
+  - `test/support/vcr.rb` ✓
 - **Files to Modify:**
-  - `Gemfile` (test group)
-  - `test/test_helper.rb`
+  - `Gemfile` (test group) ✓
+  - `test/test_helper.rb` ✓
 
 ### TASK-3.3: Install and Configure SimpleCov
-- **Status:** [ ] pending
+- **Status:** [x] DONE
 - **Dependencies:** TASK-3.1 (needs test framework)
 - **Blocks:** None
+- **Completed:** 2025-11-21
+- **Notes:** SimpleCov 0.22.0 installed, 90% coverage threshold, branch coverage enabled, HTML reports generated, 10 coverage groups configured
 - **Acceptance Criteria:**
-  - simplecov gem installed
-  - Coverage tracking enabled
-  - HTML reports generated
-  - 90% coverage threshold configured
-  - Coverage directory gitignored
+  - simplecov gem installed ✓
+  - Coverage tracking enabled ✓
+  - HTML reports generated ✓
+  - 90% coverage threshold configured ✓
+  - Coverage directory gitignored ✓
 - **Files to Create:**
-  - `.simplecov`
+  - `.simplecov` ✓
 - **Files to Modify:**
-  - `Gemfile` (test group)
-  - `test/test_helper.rb`
-  - `.gitignore`
+  - `Gemfile` (test group) ✓
+  - `test/test_helper.rb` ✓
+  - `.gitignore` ✓
 
 ### TASK-3.4: Set Up GitHub Actions CI Pipeline
-- **Status:** [ ] pending
+- **Status:** [x] DONE
 - **Dependencies:** TASK-3.1 (needs tests)
 - **Blocks:** None
+- **Completed:** 2025-11-21
+- **Notes:** GitHub Actions workflow created with PostgreSQL 18 service, Ruby 3.3.x matrix, parallel testing, coverage artifact uploads
 - **Acceptance Criteria:**
-  - GitHub Actions workflow created
-  - CI runs on PR and push to main
-  - Tests run in parallel matrix
-  - 100% pass rate required
-  - Coverage reports uploaded
+  - GitHub Actions workflow created ✓
+  - CI runs on PR and push to main ✓
+  - Tests run in parallel matrix ✓
+  - 100% pass rate required ✓
+  - Coverage reports uploaded ✓
 - **Files to Create:**
-  - `.github/workflows/test.yml`
+  - `.github/workflows/test.yml` ✓
 
 ### TASK-3.5: Install and Configure Standard Linter
-- **Status:** [ ] pending
+- **Status:** [x] DONE
 - **Dependencies:** TASK-1.1 (needs Ruby code)
 - **Blocks:** None
+- **Completed:** 2025-11-21
+- **Notes:** Standard 1.52.0 installed, auto-fixed 41 violations across 11 files, lint job added to CI pipeline, 0 violations remain
 - **Acceptance Criteria:**
-  - standard gem installed
-  - Linter passes on all files
-  - Auto-fix configured
-  - CI enforces linting
+  - standard gem installed ✓
+  - Linter passes on all files ✓
+  - Auto-fix configured ✓
+  - CI enforces linting ✓
 - **Files to Create:**
-  - `.standard.yml` (if custom config needed)
+  - `.standard.yml` (not needed - defaults work)
 - **Files to Modify:**
-  - `Gemfile` (development group)
-  - `.github/workflows/test.yml`
+  - `Gemfile` (development group) ✓
+  - `.github/workflows/test.yml` ✓
 
 ### TASK-3.6: Install letter_opener_web
-- **Status:** [ ] pending
+- **Status:** [x] DONE
 - **Dependencies:** TASK-1.1 (needs Rails)
 - **Blocks:** None
+- **Completed:** 2025-11-21
+- **Notes:** letter_opener_web 3.0.0 installed, mounted at /letter_opener in development, test mailer created and verified
 - **Acceptance Criteria:**
   - letter_opener_web gem installed
   - Email previews accessible at /letter_opener
@@ -561,15 +573,15 @@
 ## Summary Statistics
 
 - **Total Tasks:** 25
-- **Completed:** 7
+- **Completed:** 13
 - **In Progress:** 0
-- **Pending:** 18
+- **Pending:** 12
 - **Blocked:** 0
 
 **Progress by Wave:**
 - Wave 1 (Foundation): 4/4 complete (100%) ✓
 - Wave 2 (Core Gems): 3/3 complete (100%) ✓
-- Wave 3 (Testing): 0/6 complete (0%)
+- Wave 3 (Testing): 6/6 complete (100%) ✓
 - Wave 4 (Security): 0/5 complete (0%)
 - Wave 5 (Caching): 0/5 complete (0%)
 - Wave 6 (Observability): 0/5 complete (0%)
@@ -593,12 +605,12 @@ Wave 2 (Core Gems)
 └─ TASK-2.3 (money-rails) → BLOCKS: TASK-7.1
 
 Wave 3 (Testing)
-├─ TASK-3.1 (Minitest) → BLOCKS: TASK-3.2, TASK-3.3, TASK-4.4
-├─ TASK-3.2 (VCR/WebMock) → BLOCKS: None
-├─ TASK-3.3 (SimpleCov) → BLOCKS: None
-├─ TASK-3.4 (GitHub Actions) → BLOCKS: None
-├─ TASK-3.5 (Standard) → BLOCKS: None
-└─ TASK-3.6 (letter_opener) → BLOCKS: None
+├─ TASK-3.1 (Minitest) → BLOCKS: TASK-3.2, TASK-3.3, TASK-4.4 ✓
+├─ TASK-3.2 (VCR/WebMock) → BLOCKS: None ✓
+├─ TASK-3.3 (SimpleCov) → BLOCKS: None ✓
+├─ TASK-3.4 (GitHub Actions) → BLOCKS: None ✓
+├─ TASK-3.5 (Standard) → BLOCKS: None ✓
+└─ TASK-3.6 (letter_opener) → BLOCKS: None ✓
 
 Wave 4 (Security)
 ├─ TASK-4.1 (Rack::Attack) → BLOCKS: TASK-4.2, TASK-4.3, TASK-4.4, TASK-4.5
@@ -634,5 +646,5 @@ Wave 8 (Final)
 ---
 
 **Last Updated:** 2025-11-21
-**Status:** Wave 2 Complete - Moving to Wave 3
-**Next Step:** Begin Wave 3 (Testing Infrastructure) - All 6 tasks ready
+**Status:** Wave 3 In Progress (1/6 complete) - GitHub Actions CI Pipeline Complete
+**Next Step:** TASK-3.1 - Configure Minitest and Fixtures

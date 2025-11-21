@@ -1,7 +1,6 @@
 # encoding : utf-8
 
 MoneyRails.configure do |config|
-
   # Set the default currency to USD (required for accounting application)
   # All monetary values default to USD unless explicitly specified
   #
@@ -34,8 +33,8 @@ MoneyRails.configure do |config|
   # - default: 0 provides sensible fallback
   #
   config.amount_column = {
-    prefix: '',
-    postfix: '_cents',
+    prefix: "",
+    postfix: "_cents",
     column_name: nil,
     type: :integer,      # Critical: Store as integers, never floats
     present: true,
@@ -44,13 +43,13 @@ MoneyRails.configure do |config|
   }
 
   config.currency_column = {
-    prefix: '',
-    postfix: '_currency',
+    prefix: "",
+    postfix: "_currency",
     column_name: nil,
     type: :string,
     present: true,
     null: false,
-    default: 'USD'
+    default: "USD"
   }
 
   # If you would like to use I18n localization (formatting depends on the locale):

@@ -24,7 +24,7 @@ gem "tailwindcss-rails"
 gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "tzinfo-data", platforms: %i[windows jruby]
 
 # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
 gem "solid_cache"
@@ -60,7 +60,7 @@ gem "pagy", "~> 9.4"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem "debug", platforms: %i[mri windows], require: "debug/prelude"
 
   # Audits gems for known security defects (use config/bundler-audit.yml to ignore issues)
   gem "bundler-audit", require: false
@@ -68,17 +68,34 @@ group :development, :test do
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
 
-  # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
-  gem "rubocop-rails-omakase", require: false
+  # Standard linter for Rails 8 [https://github.com/standardrb/standard]
+  # TASK-3.5: Standard linter for code style
+  gem "standard", require: false
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  # Email delivery previews for development [https://github.com/fgrehm/letter_opener_web]
+  # TASK-3.6: letter_opener_web for email preview UI
+  gem "letter_opener_web"
 end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+
+  # VCR - Record HTTP interactions for testing [https://github.com/vcr/vcr]
+  # TASK-3.2: VCR for HTTP mocking and recording
+  gem "vcr", "~> 6.3"
+
+  # WebMock - Mock HTTP requests [https://github.com/bblimke/webmock]
+  # TASK-3.2: WebMock for stubbing HTTP requests
+  gem "webmock", "~> 3.23"
+
+  # Code coverage tracking [https://github.com/simplecov-ruby/simplecov]
+  # TASK-3.3: SimpleCov for test coverage reporting with 90% minimum threshold
+  gem "simplecov", "~> 0.22.0", require: false
 end

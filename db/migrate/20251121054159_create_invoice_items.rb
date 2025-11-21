@@ -4,7 +4,7 @@ class CreateInvoiceItems < ActiveRecord::Migration[8.1]
       # Monetized columns following ADR-01.001 Money pattern
       # amount_cents stored as integer to avoid floating-point precision errors
       t.integer :amount_cents, null: false, default: 0
-      t.string :amount_currency, null: false, default: 'USD'
+      t.string :amount_currency, null: false, default: "USD"
 
       t.timestamps
     end

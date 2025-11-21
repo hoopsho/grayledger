@@ -14,13 +14,13 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authorized(exception)
-    policy_name = exception.policy.class.to_s.underscore
-    action_name = exception.query.to_s.sub(/\?$/, '')
+    exception.policy.class.to_s.underscore
+    exception.query.to_s.sub(/\?$/, "")
 
     # You can customize this behavior based on your needs
     # For HTML requests, redirect to root; for JSON requests, return 403
     if request.format.json?
-      render json: { error: "You are not authorized to perform this action" }, status: :forbidden
+      render json: {error: "You are not authorized to perform this action"}, status: :forbidden
     else
       redirect_to root_url, alert: "You are not authorized to perform this action"
     end

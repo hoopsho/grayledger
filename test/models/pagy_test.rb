@@ -67,7 +67,7 @@ class PagyTest < ActiveSupport::TestCase
     items = [
       OpenStruct.new(id: 1, name: "Item 1"),
       OpenStruct.new(id: 2, name: "Item 2"),
-      OpenStruct.new(id: 3, name: "Item 3"),
+      OpenStruct.new(id: 3, name: "Item 3")
     ]
 
     pagy, paginated_items = controller.pagy(items.to_enum, size: 2)
