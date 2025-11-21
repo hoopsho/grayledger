@@ -4,14 +4,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Active Feature
 
-**🚧 IN DEVELOPMENT 🚧**
+**✅ COMPLETE - READY FOR PR**
 
 - **Feature:** Rails 8 Minimal Stack (ADR 01.001)
 - **Branch:** `feature/adr-01.001-rails-8-minimal-stack`
 - **PRD:** [dev/prd-from-adr-01.001.md](dev/prd-from-adr-01.001.md)
 - **Tasks:** [dev/TASKS.md](dev/TASKS.md)
-- **Status:** Wave 1 - Foundation (0/25 tasks complete)
-- **Next:** TASK-1.1 - Initialize Rails 8 Application
+- **Status:** 100% Complete - All 25 tasks done, 329 tests passing
+- **Verification:** [dev/wave-8-goals-verification.md](dev/wave-8-goals-verification.md)
+- **Next:** Create PR and merge to main
 
 ## Project Overview
 
@@ -23,10 +24,23 @@ The product vision: AI handles 100% of bookkeeping (bank feeds, receipt OCR, cat
 
 ```
 grayledger/
-├── app/                    # Rails application code (to be created)
-├── config/                 # Rails configuration (to be created)
-├── db/                     # Database migrations (to be created)
-├── test/                   # Minitest test suite (to be created)
+├── app/                    # Rails 8 application code
+│   ├── controllers/        # Application controllers with metrics and logging
+│   ├── models/             # Models (Current, Metric, MetricRollup, Alert)
+│   │   └── concerns/       # Cacheable, AutoCacheInvalidator
+│   ├── services/           # CacheService, MetricsTracker, AlertService
+│   ├── jobs/               # MetricsCollectionJob, ApplicationJob base
+│   ├── mailers/            # AlertMailer
+│   ├── helpers/            # CacheHelper
+│   └── views/              # Email templates
+├── config/                 # Rails 8 configuration
+│   ├── initializers/       # rack_attack.rb, solid_queue.rb
+│   ├── cache.yml           # Solid Cache configuration
+│   └── environments/       # Production logging and caching configured
+├── db/                     # Database migrations (16 tables)
+│   ├── migrate/            # Solid Queue, Solid Cache, Metrics, Alerts
+│   └── schema.rb           # PostgreSQL 18 schema
+├── test/                   # Minitest test suite (329 tests, 100% passing)
 ├── docs/adrs/              # Architecture Decision Records
 │   ├── 01.foundation/      # Rails 8 stack, deployment, database
 │   ├── 02.auth/           # Passwordless OTP, Pundit authorization
