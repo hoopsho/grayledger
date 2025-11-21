@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "test_helper"
-require "ostruct"
 
 # Integration Tests for Rack::Attack Rate Limiting Rules
 # TASK-4.2: Tests for OTP and API rate limiting rules
@@ -24,6 +23,27 @@ class RateLimitingTest < ActionDispatch::IntegrationTest
 
   def get_with_ip(path, ip = @test_ip)
     get path, headers: { "REMOTE_ADDR" => ip }
+  end
+
+  # Mock request object that simulates Rack::Attack::Request behavior
+  class MockRackAttackRequest
+    attr_reader :env
+
+    def initialize(env)
+      @env = env
+    end
+
+    def [](key)
+      @env[key]
+    end
+  end
+
+  # Helper method to create a mock Rack::Attack::Request
+  def mock_rack_attack_request(match_data)
+    mock_env = {
+      "rack.attack.match_data" => match_data
+    }
+    MockRackAttackRequest.new(mock_env)
   end
 
   # ============================================================================
@@ -104,10 +124,9 @@ class RateLimitingTest < ActionDispatch::IntegrationTest
 
     # Create a mock request with match_data to verify response structure
     # This is a unit test of the responder function
-    mock_env = {
-      "rack.attack.match_data" => { limit: 3, count: 4, period: 900 }
-    }
-    mock_request = OpenStruct.new(env: mock_env)
+    mock_request = mock_rack_attack_request(
+      { limit: 3, count: 4, period: 900 }
+    )
 
     status, headers, body = responder.call(mock_request)
 

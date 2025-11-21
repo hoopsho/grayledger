@@ -33,9 +33,28 @@ Rails.application.configure do
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
 
-  # Log to STDOUT with the current request id as a default log tag.
+  # Configure structured JSON logging for production [TASK-6.4]
+  require "json_logger"
+
+  # Use JSON logger that outputs structured logs to stdout for 12-factor app compliance
+  config.logger = JsonLogger.new(
+    $stdout,
+    env: Rails.env,
+    level: ENV.fetch("RAILS_LOG_LEVEL", "info").upcase.to_sym,
+    color_output: false
+  )
+
+  # Add request ID to all logs
   config.log_tags = [:request_id]
-  config.logger = ActiveSupport::TaggedLogging.logger($stdout)
+
+  # Include request context in log tags for easier debugging
+  config.log_tags << lambda { |req|
+    # Include key context if available
+    context = []
+    context << "user=#{Current.user&.id}" if defined?(Current) && Current.user
+    context << "company=#{Current.company&.id}" if defined?(Current) && Current.company
+    context.any? ? "[#{context.join(', ')}]" : nil
+  }
 
   # Change to "debug" to log everything (including potentially personally-identifiable information!).
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")

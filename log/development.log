@@ -3877,3 +3877,716 @@ FOREIGN KEY ("job_id")
   [1m[36mSolidCache::Entry Upsert (8.2ms)[0m  [1m[32mINSERT INTO "solid_cache_entries" ("key","value","key_hash","byte_size","created_at") VALUES ('\x646576656c6f706d656e743a746573745f6b6579', '\x00110273fa35f70948da41ffffffff48656c6c6f2066726f6d20536f6c696420436163686521', 5836533280860164090, 198, CURRENT_TIMESTAMP) ON CONFLICT ("key_hash") DO UPDATE SET "key"=excluded."key","value"=excluded."value","byte_size"=excluded."byte_size" RETURNING "id" /*application='Grayledger'*/[0m
   [1m[36mSolidCache::Entry Load (0.4ms)[0m  [1m[34mSELECT "solid_cache_entries"."key", "solid_cache_entries"."value" FROM "solid_cache_entries" WHERE "solid_cache_entries"."key_hash" IN (5836533280860164090) /*application='Grayledger'*/[0m
   [1m[36mSolidCache::Entry Delete All (5.0ms)[0m  [1m[31mDELETE FROM "solid_cache_entries" WHERE "solid_cache_entries"."key_hash" = 5836533280860164090 /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+Migrating to CreateAlerts (20251121081654)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[35m (16.4ms)[0m  [1m[35mCREATE TABLE "alerts" ("id" bigserial primary key, "alert_type" character varying NOT NULL, "metric_name" character varying NOT NULL, "current_value" decimal(12,4) NOT NULL, "threshold" decimal(12,4) NOT NULL, "triggered_at" timestamp(6) NOT NULL, "resolved_at" timestamp(6), "description" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE INDEX "index_alerts_by_type_and_time" ON "alerts" ("alert_type", "triggered_at") /*application='Grayledger'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_alerts_by_metric_and_time" ON "alerts" ("metric_name", "triggered_at") /*application='Grayledger'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_alerts_by_resolved" ON "alerts" ("resolved_at") /*application='Grayledger'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_alerts_by_triggered_time" ON "alerts" ("triggered_at") /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251121081654') RETURNING "version" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (7.1ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+Migrating to CreateMetrics (20251121081703)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[35m (8.6ms)[0m  [1m[35mCREATE TABLE "metrics" ("id" bigserial primary key, "metric_name" character varying NOT NULL, "metric_type" character varying NOT NULL, "value" decimal(20,4) NOT NULL, "tags" jsonb DEFAULT '{}', "recorded_at" timestamp(6) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_metrics_on_metric_name" ON "metrics" ("metric_name") /*application='Grayledger'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_metrics_on_metric_type" ON "metrics" ("metric_type") /*application='Grayledger'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_metrics_on_recorded_at" ON "metrics" ("recorded_at") /*application='Grayledger'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_metrics_on_tags" ON "metrics" USING gin ("tags") /*application='Grayledger'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_metrics_on_metric_name_and_recorded_at" ON "metrics" ("metric_name", "recorded_at") /*application='Grayledger'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_metrics_on_metric_type_and_recorded_at" ON "metrics" ("metric_type", "recorded_at") /*application='Grayledger'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35m      ALTER TABLE metrics
+      ADD CONSTRAINT valid_metric_type
+      CHECK (metric_type IN ('counter', 'gauge', 'timing'))
+ /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251121081703') RETURNING "version" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (9.0ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+Migrating to CreateMetricRollups (20251121081736)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[35m (6.5ms)[0m  [1m[35mCREATE TABLE "metric_rollups" ("id" bigserial primary key, "metric_name" character varying NOT NULL, "metric_type" character varying NOT NULL, "rollup_interval" character varying NOT NULL, "aggregated_at" timestamp(6) NOT NULL, "statistics" jsonb DEFAULT '{}' NOT NULL, "description" text, "sample_count" integer DEFAULT 0 NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Grayledger'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMENT ON COLUMN "metric_rollups"."metric_name" IS 'e.g., ''api.response_time'', ''cache.hit_rate''' /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMENT ON COLUMN "metric_rollups"."metric_type" IS 'counter, gauge, histogram' /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMENT ON COLUMN "metric_rollups"."rollup_interval" IS 'hourly, daily, weekly' /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMENT ON COLUMN "metric_rollups"."aggregated_at" IS 'Time period this rollup covers' /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMENT ON COLUMN "metric_rollups"."statistics" IS 'Aggregated statistics' /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMENT ON COLUMN "metric_rollups"."sample_count" IS 'Number of samples included in rollup' /*application='Grayledger'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_metric_rollups_by_metric_and_interval_and_time" ON "metric_rollups" ("metric_name", "rollup_interval", "aggregated_at") /*application='Grayledger'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_metric_rollups_by_interval_and_time" ON "metric_rollups" ("rollup_interval", "aggregated_at") /*application='Grayledger'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_metric_rollups_by_metric_and_time" ON "metric_rollups" ("metric_name", "aggregated_at") /*application='Grayledger'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_metric_rollups_by_time" ON "metric_rollups" ("aggregated_at") /*application='Grayledger'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_metric_rollups_by_type" ON "metric_rollups" ("metric_type") /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251121081736') RETURNING "version" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (7.2ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7186385961580294665) /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Grayledger'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (2.1ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'test' AND "metrics"."metric_type" = 'counter' AND "metrics"."recorded_at" = '2025-11-21 08:20:38.378676' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (1.0ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('test', 'counter', 1.0, '{"company_id":123}', '2025-11-21 08:20:38.378676', '2025-11-21 08:20:38.419342', '2025-11-21 08:20:38.419342') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (72.8ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mMetric Load (0.6ms)[0m  [1m[34mSELECT "metrics".* FROM "metrics" WHERE (tags->'company_id' = '123') /* loading for pp */ LIMIT 11 /*application='Grayledger'*/[0m
+  [1m[36mMetric Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "metrics" WHERE (tags->'company_id' = '123') /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'test_metric' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:21:20.257809' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK /*application='Grayledger'*/[0m
+  [1m[36mMetric Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "metrics" /*application='Grayledger'*/[0m
+  [1m[36mMetric Load (0.3ms)[0m  [1m[34mSELECT "metrics".* FROM "metrics" WHERE "metrics"."metric_name" = 'test_metric' /* loading for inspect */ LIMIT 11 /*application='Grayledger'*/[0m
+  [1m[36mMetric Delete All (7.6ms)[0m  [1m[31mDELETE FROM "metrics" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'daily_active_users' AND "metrics"."metric_type" = 'counter' AND "metrics"."recorded_at" = '2025-11-21 08:21:23.178648' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK /*application='Grayledger'*/[0m
+MetricsTracker: Failed to counter 'daily_active_users': Validation failed: Tags must be provided (can be empty hash {})
+  [1m[36mMetric Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "metrics" /*application='Grayledger'*/[0m
+  [1m[36mMetric Load (0.2ms)[0m  [1m[34mSELECT "metrics".* FROM "metrics" /*application='Grayledger'*/[0m
+  [1m[36mMetric Delete All (0.8ms)[0m  [1m[31mDELETE FROM "metrics" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'daily_active_users' AND "metrics"."metric_type" = 'counter' AND "metrics"."recorded_at" = '2025-11-21 08:21:55.549399' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.5ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('daily_active_users', 'counter', 1.0, '{}', '2025-11-21 08:21:55.549399', '2025-11-21 08:21:55.568325', '2025-11-21 08:21:55.568325') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (9.8ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mMetric Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "metrics" /*application='Grayledger'*/[0m
+  [1m[36mMetric Delete All (20.5ms)[0m  [1m[31mDELETE FROM "metrics" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'revenue' AND "metrics"."metric_type" = 'counter' AND "metrics"."recorded_at" = '2025-11-21 08:22:33.455588' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.9ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('revenue', 'counter', 100.0, '{"company_id":1}', '2025-11-21 08:22:33.455588', '2025-11-21 08:22:33.492944', '2025-11-21 08:22:33.492944') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (23.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'revenue' AND "metrics"."metric_type" = 'counter' AND "metrics"."recorded_at" = '2025-11-21 08:22:33.527774' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.5ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('revenue', 'counter', 200.0, '{"company_id":2}', '2025-11-21 08:22:33.527774', '2025-11-21 08:22:33.531145', '2025-11-21 08:22:33.531145') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (13.7ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mMetric Load (0.5ms)[0m  [1m[34mSELECT "metrics".* FROM "metrics" /*application='Grayledger'*/[0m
+  [1m[36mMetric Load (0.7ms)[0m  [1m[34mSELECT "metrics".* FROM "metrics" WHERE (tags->'company_id' = '1') /* loading for pp */ LIMIT 11 /*application='Grayledger'*/[0m
+  [1m[36mMetric Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "metrics" WHERE (tags->'company_id' = '1') /*application='Grayledger'*/[0m
+  [1m[36mMetric Load (5.1ms)[0m  [1m[34mSELECT "metrics".* FROM "metrics" WHERE (tags->'company_id' = '1') /*application='Grayledger'*/[0m
+  [1m[36mMetric Delete All (6.4ms)[0m  [1m[31mDELETE FROM "metrics" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (5.6ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'request_duration_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:22:50.496787' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (16.0ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('request_duration_ms', 'timing', 125.0, '{}', '2025-11-21 08:22:50.496787', '2025-11-21 08:22:50.567024', '2025-11-21 08:22:50.567024') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mMetric Count (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "metrics" /*application='Grayledger'*/[0m
+  [1m[36mMetric Load (1.0ms)[0m  [1m[34mSELECT "metrics".* FROM "metrics" /* loading for inspect */ LIMIT 11 /*application='Grayledger'*/[0m
+  [1m[36mMetric Delete All (13.9ms)[0m  [1m[31mDELETE FROM "metrics" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'revenue' AND "metrics"."metric_type" = 'counter' AND "metrics"."recorded_at" = '2025-11-21 08:23:22.741230' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('revenue', 'counter', 100.0, '{"company_id":1}', '2025-11-21 08:23:22.741230', '2025-11-21 08:23:22.774926', '2025-11-21 08:23:22.774926') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (19.1ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'revenue' AND "metrics"."metric_type" = 'counter' AND "metrics"."recorded_at" = '2025-11-21 08:23:22.803455' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.5ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('revenue', 'counter', 200.0, '{"company_id":2}', '2025-11-21 08:23:22.803455', '2025-11-21 08:23:22.806303', '2025-11-21 08:23:22.806303') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (47.8ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mMetric Load (0.5ms)[0m  [1m[34mSELECT "metrics".* FROM "metrics" /*application='Grayledger'*/[0m
+  [1m[36mMetric Sum (0.9ms)[0m  [1m[34mSELECT SUM("metrics"."value") FROM "metrics" WHERE "metrics"."metric_name" = 'revenue' /*application='Grayledger'*/[0m
+  [1m[36mMetric Load (0.8ms)[0m  [1m[34mSELECT "metrics".* FROM "metrics" WHERE "metrics"."metric_name" = 'revenue' AND (tags->'company_id' = '1') /* loading for pp */ LIMIT 11 /*application='Grayledger'*/[0m
+  [1m[36mMetric Sum (0.6ms)[0m  [1m[34mSELECT SUM("metrics"."value") FROM "metrics" WHERE "metrics"."metric_name" = 'revenue' AND (tags->'company_id' = '1') /*application='Grayledger'*/[0m
+  [1m[36mMetric Delete All (13.6ms)[0m  [1m[31mDELETE FROM "metrics" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'revenue' AND "metrics"."metric_type" = 'counter' AND "metrics"."recorded_at" = '2025-11-21 08:23:34.074196' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.7ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('revenue', 'counter', 100.0, '{"company_id":1}', '2025-11-21 08:23:34.074196', '2025-11-21 08:23:34.106529', '2025-11-21 08:23:34.106529') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (7.4ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mMetric Load (0.6ms)[0m  [1m[34mSELECT "metrics".* FROM "metrics" WHERE "metrics"."metric_name" = 'revenue' /* loading for pp */ LIMIT 11 /*application='Grayledger'*/[0m
+  [1m[36mMetric Load (0.7ms)[0m  [1m[34mSELECT "metrics".* FROM "metrics" WHERE "metrics"."metric_name" = 'revenue' AND (tags->'company_id' = '1') /* loading for pp */ LIMIT 11 /*application='Grayledger'*/[0m
+  [1m[36mMetric Delete All (9.5ms)[0m  [1m[31mDELETE FROM "metrics" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'revenue' AND "metrics"."metric_type" = 'counter' AND "metrics"."recorded_at" = '2025-11-21 08:23:47.266958' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('revenue', 'counter', 100.0, '{"company_id":1}', '2025-11-21 08:23:47.266958', '2025-11-21 08:23:47.286652', '2025-11-21 08:23:47.286652') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (12.3ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'revenue' AND "metrics"."metric_type" = 'counter' AND "metrics"."recorded_at" = '2025-11-21 08:23:47.305018' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('revenue', 'counter', 200.0, '{"company_id":2}', '2025-11-21 08:23:47.305018', '2025-11-21 08:23:47.307253', '2025-11-21 08:23:47.307253') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (10.3ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mMetric Sum (0.8ms)[0m  [1m[34mSELECT SUM("metrics"."value") FROM "metrics" WHERE "metrics"."metric_name" = 'revenue' AND (tags->'company_id' = '1') /*application='Grayledger'*/[0m
+  [1m[36mMetric Sum (0.3ms)[0m  [1m[34mSELECT SUM("metrics"."value") FROM "metrics" WHERE "metrics"."metric_name" = 'revenue' /*application='Grayledger'*/[0m
+  [1m[36mMetric Delete All (11.2ms)[0m  [1m[31mDELETE FROM "metrics" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:05.765409' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.7ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 1.0, '{}', '2025-11-21 08:25:05.765409', '2025-11-21 08:25:05.784646', '2025-11-21 08:25:05.784646') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (7.7ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:05.794708' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 2.0, '{}', '2025-11-21 08:25:05.794708', '2025-11-21 08:25:05.796422', '2025-11-21 08:25:05.796422') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:05.800172' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 3.0, '{}', '2025-11-21 08:25:05.800172', '2025-11-21 08:25:05.801611', '2025-11-21 08:25:05.801611') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:05.805751' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 4.0, '{}', '2025-11-21 08:25:05.805751', '2025-11-21 08:25:05.807143', '2025-11-21 08:25:05.807143') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (3.2ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:05.811565' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 5.0, '{}', '2025-11-21 08:25:05.811565', '2025-11-21 08:25:05.813254', '2025-11-21 08:25:05.813254') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:05.817222' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 6.0, '{}', '2025-11-21 08:25:05.817222', '2025-11-21 08:25:05.818928', '2025-11-21 08:25:05.818928') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:05.822889' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 7.0, '{}', '2025-11-21 08:25:05.822889', '2025-11-21 08:25:05.824301', '2025-11-21 08:25:05.824301') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (14.7ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:05.840405' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 8.0, '{}', '2025-11-21 08:25:05.840405', '2025-11-21 08:25:05.842603', '2025-11-21 08:25:05.842603') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (29.6ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:05.873735' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 9.0, '{}', '2025-11-21 08:25:05.873735', '2025-11-21 08:25:05.876405', '2025-11-21 08:25:05.876405') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (53.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:05.931957' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 10.0, '{}', '2025-11-21 08:25:05.931957', '2025-11-21 08:25:05.935514', '2025-11-21 08:25:05.935514') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (11.0ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:05.948929' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.5ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 11.0, '{}', '2025-11-21 08:25:05.948929', '2025-11-21 08:25:05.951224', '2025-11-21 08:25:05.951224') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (18.5ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:05.971752' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.5ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 12.0, '{}', '2025-11-21 08:25:05.971752', '2025-11-21 08:25:05.973910', '2025-11-21 08:25:05.973910') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (70.6ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.046212' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.5ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 13.0, '{}', '2025-11-21 08:25:06.046212', '2025-11-21 08:25:06.049172', '2025-11-21 08:25:06.049172') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (46.4ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.097856' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.7ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 14.0, '{}', '2025-11-21 08:25:06.097856', '2025-11-21 08:25:06.101547', '2025-11-21 08:25:06.101547') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (66.5ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.170823' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 15.0, '{}', '2025-11-21 08:25:06.170823', '2025-11-21 08:25:06.173773', '2025-11-21 08:25:06.173773') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (17.7ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.193694' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.5ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 16.0, '{}', '2025-11-21 08:25:06.193694', '2025-11-21 08:25:06.196539', '2025-11-21 08:25:06.196539') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (7.3ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.206185' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 17.0, '{}', '2025-11-21 08:25:06.206185', '2025-11-21 08:25:06.209046', '2025-11-21 08:25:06.209046') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (11.7ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.223337' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 18.0, '{}', '2025-11-21 08:25:06.223337', '2025-11-21 08:25:06.226227', '2025-11-21 08:25:06.226227') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (11.7ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.240482' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 19.0, '{}', '2025-11-21 08:25:06.240482', '2025-11-21 08:25:06.243766', '2025-11-21 08:25:06.243766') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (11.3ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.257589' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 20.0, '{}', '2025-11-21 08:25:06.257589', '2025-11-21 08:25:06.260756', '2025-11-21 08:25:06.260756') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (11.6ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.274590' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.5ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 21.0, '{}', '2025-11-21 08:25:06.274590', '2025-11-21 08:25:06.277028', '2025-11-21 08:25:06.277028') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (7.3ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.286414' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 22.0, '{}', '2025-11-21 08:25:06.286414', '2025-11-21 08:25:06.289885', '2025-11-21 08:25:06.289885') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (10.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.303235' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 23.0, '{}', '2025-11-21 08:25:06.303235', '2025-11-21 08:25:06.306085', '2025-11-21 08:25:06.306085') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (12.1ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.320267' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 24.0, '{}', '2025-11-21 08:25:06.320267', '2025-11-21 08:25:06.322306', '2025-11-21 08:25:06.322306') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (13.4ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.337459' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 25.0, '{}', '2025-11-21 08:25:06.337459', '2025-11-21 08:25:06.339896', '2025-11-21 08:25:06.339896') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (5.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.347726' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 26.0, '{}', '2025-11-21 08:25:06.347726', '2025-11-21 08:25:06.349792', '2025-11-21 08:25:06.349792') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (3.1ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.354535' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 27.0, '{}', '2025-11-21 08:25:06.354535', '2025-11-21 08:25:06.356356', '2025-11-21 08:25:06.356356') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.360257' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 28.0, '{}', '2025-11-21 08:25:06.360257', '2025-11-21 08:25:06.362490', '2025-11-21 08:25:06.362490') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (6.4ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.370659' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 29.0, '{}', '2025-11-21 08:25:06.370659', '2025-11-21 08:25:06.373047', '2025-11-21 08:25:06.373047') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (7.0ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.381889' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 30.0, '{}', '2025-11-21 08:25:06.381889', '2025-11-21 08:25:06.384160', '2025-11-21 08:25:06.384160') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.387474' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 31.0, '{}', '2025-11-21 08:25:06.387474', '2025-11-21 08:25:06.389455', '2025-11-21 08:25:06.389455') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.2ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.393131' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 32.0, '{}', '2025-11-21 08:25:06.393131', '2025-11-21 08:25:06.394716', '2025-11-21 08:25:06.394716') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.398932' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 33.0, '{}', '2025-11-21 08:25:06.398932', '2025-11-21 08:25:06.400688', '2025-11-21 08:25:06.400688') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.404898' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 34.0, '{}', '2025-11-21 08:25:06.404898', '2025-11-21 08:25:06.407625', '2025-11-21 08:25:06.407625') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (6.6ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.416268' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 35.0, '{}', '2025-11-21 08:25:06.416268', '2025-11-21 08:25:06.418453', '2025-11-21 08:25:06.418453') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (6.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.427742' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 36.0, '{}', '2025-11-21 08:25:06.427742', '2025-11-21 08:25:06.429954', '2025-11-21 08:25:06.429954') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.433091' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 37.0, '{}', '2025-11-21 08:25:06.433091', '2025-11-21 08:25:06.434733', '2025-11-21 08:25:06.434733') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.438802' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 38.0, '{}', '2025-11-21 08:25:06.438802', '2025-11-21 08:25:06.440313', '2025-11-21 08:25:06.440313') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (14.5ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.456181' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 39.0, '{}', '2025-11-21 08:25:06.456181', '2025-11-21 08:25:06.458939', '2025-11-21 08:25:06.458939') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.461777' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 40.0, '{}', '2025-11-21 08:25:06.461777', '2025-11-21 08:25:06.463653', '2025-11-21 08:25:06.463653') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.467570' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.5ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 41.0, '{}', '2025-11-21 08:25:06.467570', '2025-11-21 08:25:06.469533', '2025-11-21 08:25:06.469533') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.473151' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 42.0, '{}', '2025-11-21 08:25:06.473151', '2025-11-21 08:25:06.475130', '2025-11-21 08:25:06.475130') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.479167' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 43.0, '{}', '2025-11-21 08:25:06.479167', '2025-11-21 08:25:06.481597', '2025-11-21 08:25:06.481597') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (6.6ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.490720' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 44.0, '{}', '2025-11-21 08:25:06.490720', '2025-11-21 08:25:06.493376', '2025-11-21 08:25:06.493376') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (5.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.501924' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 45.0, '{}', '2025-11-21 08:25:06.501924', '2025-11-21 08:25:06.504053', '2025-11-21 08:25:06.504053') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.507576' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 46.0, '{}', '2025-11-21 08:25:06.507576', '2025-11-21 08:25:06.509767', '2025-11-21 08:25:06.509767') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.513181' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 47.0, '{}', '2025-11-21 08:25:06.513181', '2025-11-21 08:25:06.515143', '2025-11-21 08:25:06.515143') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.518889' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 48.0, '{}', '2025-11-21 08:25:06.518889', '2025-11-21 08:25:06.520867', '2025-11-21 08:25:06.520867') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.524597' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 49.0, '{}', '2025-11-21 08:25:06.524597', '2025-11-21 08:25:06.526394', '2025-11-21 08:25:06.526394') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.530233' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 50.0, '{}', '2025-11-21 08:25:06.530233', '2025-11-21 08:25:06.531959', '2025-11-21 08:25:06.531959') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.536066' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.5ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 51.0, '{}', '2025-11-21 08:25:06.536066', '2025-11-21 08:25:06.538224', '2025-11-21 08:25:06.538224') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.541836' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 52.0, '{}', '2025-11-21 08:25:06.541836', '2025-11-21 08:25:06.544000', '2025-11-21 08:25:06.544000') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.547564' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.5ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 53.0, '{}', '2025-11-21 08:25:06.547564', '2025-11-21 08:25:06.549654', '2025-11-21 08:25:06.549654') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.553164' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 54.0, '{}', '2025-11-21 08:25:06.553164', '2025-11-21 08:25:06.555211', '2025-11-21 08:25:06.555211') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.558914' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 55.0, '{}', '2025-11-21 08:25:06.558914', '2025-11-21 08:25:06.560823', '2025-11-21 08:25:06.560823') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.564586' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 56.0, '{}', '2025-11-21 08:25:06.564586', '2025-11-21 08:25:06.566315', '2025-11-21 08:25:06.566315') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.570303' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 57.0, '{}', '2025-11-21 08:25:06.570303', '2025-11-21 08:25:06.572064', '2025-11-21 08:25:06.572064') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.576080' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 58.0, '{}', '2025-11-21 08:25:06.576080', '2025-11-21 08:25:06.578023', '2025-11-21 08:25:06.578023') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.581817' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 59.0, '{}', '2025-11-21 08:25:06.581817', '2025-11-21 08:25:06.583708', '2025-11-21 08:25:06.583708') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.587548' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.5ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 60.0, '{}', '2025-11-21 08:25:06.587548', '2025-11-21 08:25:06.589612', '2025-11-21 08:25:06.589612') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.593146' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 61.0, '{}', '2025-11-21 08:25:06.593146', '2025-11-21 08:25:06.595400', '2025-11-21 08:25:06.595400') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.599172' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 62.0, '{}', '2025-11-21 08:25:06.599172', '2025-11-21 08:25:06.601312', '2025-11-21 08:25:06.601312') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (7.3ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.610645' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 63.0, '{}', '2025-11-21 08:25:06.610645', '2025-11-21 08:25:06.612952', '2025-11-21 08:25:06.612952') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (7.0ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.621996' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 64.0, '{}', '2025-11-21 08:25:06.621996', '2025-11-21 08:25:06.623896', '2025-11-21 08:25:06.623896') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.627535' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 65.0, '{}', '2025-11-21 08:25:06.627535', '2025-11-21 08:25:06.629189', '2025-11-21 08:25:06.629189') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.633377' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 66.0, '{}', '2025-11-21 08:25:06.633377', '2025-11-21 08:25:06.636123', '2025-11-21 08:25:06.636123') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (7.2ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.645103' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 67.0, '{}', '2025-11-21 08:25:06.645103', '2025-11-21 08:25:06.648137', '2025-11-21 08:25:06.648137') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (6.0ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.656370' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 68.0, '{}', '2025-11-21 08:25:06.656370', '2025-11-21 08:25:06.658595', '2025-11-21 08:25:06.658595') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.661842' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 69.0, '{}', '2025-11-21 08:25:06.661842', '2025-11-21 08:25:06.663439', '2025-11-21 08:25:06.663439') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.667594' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.3ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 70.0, '{}', '2025-11-21 08:25:06.667594', '2025-11-21 08:25:06.669368', '2025-11-21 08:25:06.669368') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.673188' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 71.0, '{}', '2025-11-21 08:25:06.673188', '2025-11-21 08:25:06.675231', '2025-11-21 08:25:06.675231') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (7.3ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.684980' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.7ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 72.0, '{}', '2025-11-21 08:25:06.684980', '2025-11-21 08:25:06.688289', '2025-11-21 08:25:06.688289') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (5.4ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.696385' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 73.0, '{}', '2025-11-21 08:25:06.696385', '2025-11-21 08:25:06.699650', '2025-11-21 08:25:06.699650') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (5.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.708112' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 74.0, '{}', '2025-11-21 08:25:06.708112', '2025-11-21 08:25:06.711493', '2025-11-21 08:25:06.711493') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (5.6ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.719485' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 75.0, '{}', '2025-11-21 08:25:06.719485', '2025-11-21 08:25:06.722820', '2025-11-21 08:25:06.722820') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (5.6ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.730905' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 76.0, '{}', '2025-11-21 08:25:06.730905', '2025-11-21 08:25:06.734015', '2025-11-21 08:25:06.734015') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (6.1ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.742472' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (1.0ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 77.0, '{}', '2025-11-21 08:25:06.742472', '2025-11-21 08:25:06.745469', '2025-11-21 08:25:06.745469') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (5.6ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.753839' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.5ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 78.0, '{}', '2025-11-21 08:25:06.753839', '2025-11-21 08:25:06.756908', '2025-11-21 08:25:06.756908') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (6.2ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.765242' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 79.0, '{}', '2025-11-21 08:25:06.765242', '2025-11-21 08:25:06.768386', '2025-11-21 08:25:06.768386') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (5.8ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.776783' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.7ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 80.0, '{}', '2025-11-21 08:25:06.776783', '2025-11-21 08:25:06.780126', '2025-11-21 08:25:06.780126') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (5.5ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.788216' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.7ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 81.0, '{}', '2025-11-21 08:25:06.788216', '2025-11-21 08:25:06.791020', '2025-11-21 08:25:06.791020') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (6.0ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.799633' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 82.0, '{}', '2025-11-21 08:25:06.799633', '2025-11-21 08:25:06.802557', '2025-11-21 08:25:06.802557') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (6.0ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.810874' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.5ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 83.0, '{}', '2025-11-21 08:25:06.810874', '2025-11-21 08:25:06.813249', '2025-11-21 08:25:06.813249') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (7.2ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.822333' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 84.0, '{}', '2025-11-21 08:25:06.822333', '2025-11-21 08:25:06.824337', '2025-11-21 08:25:06.824337') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.827963' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 85.0, '{}', '2025-11-21 08:25:06.827963', '2025-11-21 08:25:06.829940', '2025-11-21 08:25:06.829940') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.833682' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 86.0, '{}', '2025-11-21 08:25:06.833682', '2025-11-21 08:25:06.835780', '2025-11-21 08:25:06.835780') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.839384' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 87.0, '{}', '2025-11-21 08:25:06.839384', '2025-11-21 08:25:06.841346', '2025-11-21 08:25:06.841346') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.845130' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 88.0, '{}', '2025-11-21 08:25:06.845130', '2025-11-21 08:25:06.847196', '2025-11-21 08:25:06.847196') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.850918' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 89.0, '{}', '2025-11-21 08:25:06.850918', '2025-11-21 08:25:06.853467', '2025-11-21 08:25:06.853467') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.891090' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 90.0, '{}', '2025-11-21 08:25:06.891090', '2025-11-21 08:25:06.894571', '2025-11-21 08:25:06.894571') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (5.8ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.902417' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 91.0, '{}', '2025-11-21 08:25:06.902417', '2025-11-21 08:25:06.904998', '2025-11-21 08:25:06.904998') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (6.9ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.913939' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 92.0, '{}', '2025-11-21 08:25:06.913939', '2025-11-21 08:25:06.916370', '2025-11-21 08:25:06.916370') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (6.7ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.925345' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.4ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 93.0, '{}', '2025-11-21 08:25:06.925345', '2025-11-21 08:25:06.927953', '2025-11-21 08:25:06.927953') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (7.0ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.936668' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.5ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 94.0, '{}', '2025-11-21 08:25:06.936668', '2025-11-21 08:25:06.939115', '2025-11-21 08:25:06.939115') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (13.0ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.954067' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 95.0, '{}', '2025-11-21 08:25:06.954067', '2025-11-21 08:25:06.956821', '2025-11-21 08:25:06.956821') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (6.2ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.965288' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.7ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 96.0, '{}', '2025-11-21 08:25:06.965288', '2025-11-21 08:25:06.970771', '2025-11-21 08:25:06.970771') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (3.6ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.976909' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 97.0, '{}', '2025-11-21 08:25:06.976909', '2025-11-21 08:25:06.979598', '2025-11-21 08:25:06.979598') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (6.1ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.988424' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.5ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 98.0, '{}', '2025-11-21 08:25:06.988424', '2025-11-21 08:25:06.991890', '2025-11-21 08:25:06.991890') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (5.5ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:06.999804' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 99.0, '{}', '2025-11-21 08:25:06.999804', '2025-11-21 08:25:07.002623', '2025-11-21 08:25:07.002623') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (6.3ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Grayledger'*/[0m
+  [1m[36mMetric Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' AND "metrics"."metric_type" = 'timing' AND "metrics"."recorded_at" = '2025-11-21 08:25:07.011146' LIMIT 1 /*application='Grayledger'*/[0m
+  [1m[36mMetric Create (0.6ms)[0m  [1m[32mINSERT INTO "metrics" ("metric_name", "metric_type", "value", "tags", "recorded_at", "created_at", "updated_at") VALUES ('latency_ms', 'timing', 100.0, '{}', '2025-11-21 08:25:07.011146', '2025-11-21 08:25:07.014003', '2025-11-21 08:25:07.014003') RETURNING "id" /*application='Grayledger'*/[0m
+  [1m[36mTRANSACTION (6.2ms)[0m  [1m[35mCOMMIT /*application='Grayledger'*/[0m
+  [1m[36mMetric Load (0.8ms)[0m  [1m[34mSELECT "metrics".* FROM "metrics" WHERE "metrics"."metric_name" = 'latency_ms' /* loading for pp */ LIMIT 11 /*application='Grayledger'*/[0m

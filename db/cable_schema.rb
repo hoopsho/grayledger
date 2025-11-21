@@ -10,9 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_21_054159) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_21_081736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "alerts", force: :cascade do |t|
+    t.string "alert_type", null: false
+    t.datetime "created_at", null: false
+    t.decimal "current_value", precision: 12, scale: 4, null: false
+    t.text "description"
+    t.string "metric_name", null: false
+    t.datetime "resolved_at"
+    t.decimal "threshold", precision: 12, scale: 4, null: false
+    t.datetime "triggered_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["alert_type", "triggered_at"], name: "index_alerts_by_type_and_time"
+    t.index ["metric_name", "triggered_at"], name: "index_alerts_by_metric_and_time"
+    t.index ["resolved_at"], name: "index_alerts_by_resolved"
+    t.index ["triggered_at"], name: "index_alerts_by_triggered_time"
+  end
 
   create_table "invoice_items", force: :cascade do |t|
     t.integer "amount_cents", default: 0, null: false
@@ -20,6 +36,40 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_21_054159) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["amount_cents"], name: "index_invoice_items_on_amount_cents"
+  end
+
+  create_table "metric_rollups", force: :cascade do |t|
+    t.datetime "aggregated_at", null: false, comment: "Time period this rollup covers"
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "metric_name", null: false, comment: "e.g., 'api.response_time', 'cache.hit_rate'"
+    t.string "metric_type", null: false, comment: "counter, gauge, histogram"
+    t.string "rollup_interval", null: false, comment: "hourly, daily, weekly"
+    t.integer "sample_count", default: 0, null: false, comment: "Number of samples included in rollup"
+    t.jsonb "statistics", default: {}, null: false, comment: "Aggregated statistics"
+    t.datetime "updated_at", null: false
+    t.index ["aggregated_at"], name: "index_metric_rollups_by_time"
+    t.index ["metric_name", "aggregated_at"], name: "index_metric_rollups_by_metric_and_time"
+    t.index ["metric_name", "rollup_interval", "aggregated_at"], name: "index_metric_rollups_by_metric_and_interval_and_time"
+    t.index ["metric_type"], name: "index_metric_rollups_by_type"
+    t.index ["rollup_interval", "aggregated_at"], name: "index_metric_rollups_by_interval_and_time"
+  end
+
+  create_table "metrics", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "metric_name", null: false
+    t.string "metric_type", null: false
+    t.datetime "recorded_at", null: false
+    t.jsonb "tags", default: {}
+    t.datetime "updated_at", null: false
+    t.decimal "value", precision: 20, scale: 4, null: false
+    t.index ["metric_name", "recorded_at"], name: "index_metrics_on_metric_name_and_recorded_at"
+    t.index ["metric_name"], name: "index_metrics_on_metric_name"
+    t.index ["metric_type", "recorded_at"], name: "index_metrics_on_metric_type_and_recorded_at"
+    t.index ["metric_type"], name: "index_metrics_on_metric_type"
+    t.index ["recorded_at"], name: "index_metrics_on_recorded_at"
+    t.index ["tags"], name: "index_metrics_on_tags", using: :gin
+    t.check_constraint "metric_type::text = ANY (ARRAY['counter'::character varying, 'gauge'::character varying, 'timing'::character varying]::text[])", name: "valid_metric_type"
   end
 
   create_table "solid_cache_entries", force: :cascade do |t|

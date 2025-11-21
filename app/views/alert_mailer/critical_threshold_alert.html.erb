@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+      .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+      .header { background-color: #dc2626; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+      .header h1 { margin: 0; font-size: 20px; }
+      .content { background-color: #f9fafb; padding: 20px; border: 1px solid #e5e7eb; border-radius: 0 0 8px 8px; }
+      .metric-info { margin: 15px 0; padding: 15px; background-color: white; border-left: 4px solid #dc2626; }
+      .metric-name { font-size: 14px; color: #6b7280; text-transform: uppercase; }
+      .metric-value { font-size: 28px; font-weight: bold; color: #1f2937; margin: 10px 0; }
+      .threshold { font-size: 14px; color: #6b7280; }
+      .footer { margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; font-size: 12px; color: #6b7280; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Critical Alert: <%= @metric_name %></h1>
+      </div>
+      <div class="content">
+        <p>A critical threshold has been exceeded and requires your immediate attention.</p>
+
+        <div class="metric-info">
+          <div class="metric-name"><%= @metric_name %></div>
+          <div class="metric-value"><%= @formatted_value %></div>
+          <div class="threshold">Threshold: <%= @formatted_threshold %></div>
+        </div>
+
+        <dl style="margin: 20px 0;">
+          <dt style="font-weight: bold;">Alert Type:</dt>
+          <dd style="margin-left: 20px; margin-bottom: 15px;"><%= @alert_type %></dd>
+
+          <dt style="font-weight: bold;">Timestamp:</dt>
+          <dd style="margin-left: 20px; margin-bottom: 15px;"><%= @timestamp.to_formatted_s(:long) %></dd>
+        </dl>
+
+        <p style="color: #6b7280; font-size: 14px;">
+          Please log in to the GrayLedger admin dashboard to review metrics and take corrective action.
+        </p>
+
+        <div class="footer">
+          GrayLedger Monitoring System | <%= Time.current.year %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+# test/fixtures/metric_rollups.yml
+
+counter_rollup_hourly:
+  metric_name: "api.requests"
+  metric_type: "counter"
+  rollup_interval: "hourly"
+  aggregated_at: 2025-11-21 10:00:00 UTC
+  statistics: { sum: 500, count: 1 }
+  sample_count: 1
+
+gauge_rollup_hourly:
+  metric_name: "cache.hit_rate"
+  metric_type: "gauge"
+  rollup_interval: "hourly"
+  aggregated_at: 2025-11-21 10:00:00 UTC
+  statistics: { avg: 0.85, min: 0.75, max: 0.95, latest: 0.90 }
+  sample_count: 1
+
+histogram_rollup_hourly:
+  metric_name: "api.response_time"
+  metric_type: "histogram"
+  rollup_interval: "hourly"
+  aggregated_at: 2025-11-21 10:00:00 UTC
+  statistics: { count: 100, min: 10, max: 500, mean: 145.5, p50: 120, p95: 400, p99: 480, sum: 14550 }
+  sample_count: 100
+
+counter_rollup_daily:
+  metric_name: "api.requests"
+  metric_type: "counter"
+  rollup_interval: "daily"
+  aggregated_at: 2025-11-21 00:00:00 UTC
+  statistics: { sum: 12000, count: 24 }
+  sample_count: 24
+
+gauge_rollup_daily:
+  metric_name: "cache.hit_rate"
+  metric_type: "gauge"
+  rollup_interval: "daily"
+  aggregated_at: 2025-11-21 00:00:00 UTC
+  statistics: { avg: 0.82, min: 0.70, max: 0.95, latest: 0.88 }
+  sample_count: 24
+
+histogram_rollup_daily:
+  metric_name: "api.response_time"
+  metric_type: "histogram"
+  rollup_interval: "daily"
+  aggregated_at: 2025-11-21 00:00:00 UTC
+  statistics: { count: 2400, min: 5, max: 600, mean: 150.2, p50: 125, p95: 420, p99: 500, sum: 360480 }
+  sample_count: 2400

@@ -1,0 +1,12 @@
+CRITICAL ALERT: <%= @metric_name %>
+
+Alert Type: <%= @alert_type %>
+Timestamp: <%= @timestamp.to_formatted_s(:long) %>
+
+Current Value: <%= @formatted_value %>
+Threshold: <%= @formatted_threshold %>
+
+This metric has exceeded its critical threshold and requires immediate attention.
+
+---
+GrayLedger Monitoring System
