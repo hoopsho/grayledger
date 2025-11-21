@@ -2,33 +2,52 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Active Feature
+
+**🚧 IN DEVELOPMENT 🚧**
+
+- **Feature:** Rails 8 Minimal Stack (ADR 01.001)
+- **Branch:** `feature/adr-01.001-rails-8-minimal-stack`
+- **PRD:** [dev/prd-from-adr-01.001.md](dev/prd-from-adr-01.001.md)
+- **Tasks:** [dev/TASKS.md](dev/TASKS.md)
+- **Status:** Wave 1 - Foundation (0/25 tasks complete)
+- **Next:** TASK-1.1 - Initialize Rails 8 Application
+
 ## Project Overview
 
-This is an **Architecture Decision Record (ADR) repository** for an AI-driven accounting application designed to replace traditional bookkeeping for US small businesses. The actual Rails application code lives elsewhere—this repo contains only the architectural decisions and design documentation.
+This is a **Rails 8 AI-driven accounting application** designed to replace traditional bookkeeping for US small businesses. Architecture decisions are documented in `docs/adrs/` and implementation follows these decisions exactly.
 
 The product vision: AI handles 100% of bookkeeping (bank feeds, receipt OCR, categorization, tax compliance) while keeping one human in the loop for anomalies.
 
 ## Repository Structure
 
-All documentation lives in `doc/adr/` organized by domain:
+```
+grayledger/
+├── app/                    # Rails application code (to be created)
+├── config/                 # Rails configuration (to be created)
+├── db/                     # Database migrations (to be created)
+├── test/                   # Minitest test suite (to be created)
+├── docs/adrs/              # Architecture Decision Records
+│   ├── 01.foundation/      # Rails 8 stack, deployment, database
+│   ├── 02.auth/           # Passwordless OTP, Pundit authorization
+│   ├── 03.tenancy/        # Row-level company tenancy
+│   ├── 04.ledger/         # Double-entry bookkeeping core
+│   ├── 05.banks/          # Plaid integration
+│   ├── 06.ai/             # AI strategy, pgvector, anomaly queue
+│   ├── 07.invoicing/      # AI-first invoicing and AR
+│   ├── 08.documents/      # S3 + GPT-4o Vision
+│   ├── 09.assets-loans/   # Auto-depreciation/amortization
+│   ├── 10.tax/            # TaxCloud sales tax
+│   ├── 11.cogs/           # Percentage-based COGS
+│   ├── 12.imports/        # No user-facing middleware
+│   ├── 13.reports-1099/   # 1099 and tax package exports
+│   └── 14.platform/       # Superuser god-mode
+├── dev/                    # Development planning docs
+│   ├── prd-from-adr-*.md  # Product requirements from ADRs
+│   └── TASKS.md           # Current feature task breakdown
+└── CLAUDE.md              # This file
 
-```
-doc/adr/
-├── 01.foundation/      # Rails 8 stack, deployment (Heroku), database (Postgres + pgvector)
-├── 02.auth/           # Passwordless OTP, Pundit authorization
-├── 03.tenancy/        # Row-level company tenancy
-├── 04.ledger/         # Double-entry bookkeeping core, chart of accounts
-├── 05.banks/          # Plaid integration
-├── 06.ai/             # AI strategy (OpenAI/Anthropic), pgvector, anomaly queue
-├── 07.invoicing/      # AI-first invoicing and AR
-├── 08.documents/      # S3 + GPT-4o Vision for receipt/PDF processing
-├── 09.assets-loans/   # Auto-depreciation and amortization
-├── 10.tax/            # TaxCloud sales tax integration
-├── 11.cogs/           # Percentage-based COGS method
-├── 12.imports/        # No user-facing middleware philosophy
-├── 13.reports-1099/   # 1099 and tax package exports
-├── 14.platform/       # Superuser god-mode for emergency support
-```
+All ADRs live in `docs/adrs/` organized by domain (see structure above).
 
 ## Core Architectural Principles
 
@@ -152,5 +171,23 @@ When adding architecture decisions:
 5. **Tax compliance first**: Perfect books for IRS filing is the core promise
 6. **Zero middleware lock-in**: Product must work standalone without requiring users to use third-party dashboards
 
-## Related Repositories
-This is a documentation-only repository. The actual Rails application code (models, controllers, views, tests) lives in a separate private repository.
+## Development Workflow
+
+### Feature Implementation Process
+1. Read ADR thoroughly
+2. Create feature branch: `feature/adr-XX.XXX-description`
+3. Generate PRD from ADR: `dev/prd-from-adr-XX.XXX.md`
+4. Create task breakdown: `dev/TASKS.md` with dependency waves
+5. Update `CLAUDE.md` with active feature
+6. Implement tasks wave-by-wave
+7. Run full test suite (100% pass required)
+8. Create PR and merge to main
+
+### Checkpoint System
+After completing each wave of tasks:
+- Update `dev/TASKS.md` with completed tasks
+- Commit work with descriptive message
+- Run tests to validate
+- User says "next?" to proceed to next wave
+
+This ensures incremental progress with frequent validation points.
