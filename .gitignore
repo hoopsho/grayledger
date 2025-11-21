@@ -1,38 +1,133 @@
-# Rails
-*.rbc
-/.config
-/coverage
-/InstalledFiles
-/pkg
-/spec/reports
-/spec/tmp
-/test/tmp
-/test/version_tmp
-/tmp
-*.bundle
-*.so
-*.o
-*.a
-Gemfile.lock
+# See https://help.github.com/articles/ignoring-files for more about ignoring files.
 
-# environment variables
+# Ignore bundler config.
+/.bundle
+
+# Ignore all environment files (except templates).
 .env
 .env.local
+.env*.local
 
-# IDE
-.idea
-.vscode
+# Ignore all log files and tempfiles.
+/log/*
+!/log/.keep
+/tmp/*
+!/tmp/.keep
+!/tmp/pids
+/tmp/pids/*
+!/tmp/pids/.keep
+
+# Ignore pidfiles, but keep the directory.
+/tmp/pids/*
+!/tmp/pids/.keep
+
+# Ignore storage files.
+/storage/*
+!/storage/.keep
+/tmp/storage/*
+!/tmp/storage/.keep
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+/config/credentials/*.key
+
+# Ignore public uploads (if using Active Storage with local disk).
+/public/uploads
+
+# Ignore precompiled assets.
+/public/assets
+/public/packs
+/public/packs-test
+
+# Ignore yarn files.
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+
+# Ignore node_modules if using any Node.js tools.
+node_modules/
+
+# Ignore bootsnap cache.
+/tmp/cache/bootsnap*
+
+# Ignore Solid Queue files.
+/tmp/solid_queue*
+
+# Ignore test coverage.
+/coverage
+
+# Ignore IDE and editor files.
+.idea/
+.vscode/
 *.swp
 *.swo
 *~
 .DS_Store
+*.sublime-project
+*.sublime-workspace
+.project
+.settings
+.classpath
 
-# logs
-*.log
-log/
-tmp/
-doc/
+# Ignore database dumps.
+*.dump
+*.sql
 
-# vendor
-vendor/bundle/
-vendor/cache/
+# Ignore Rails cache and temporary files.
+.byebug_history
+/db/*.sqlite3
+/db/*.sqlite3-*
+
+# Ignore Spring files.
+/spring/*.pid
+
+# Ignore RubyMine files.
+/.rakeTasks
+
+# Ignore RVM files.
+.rvmrc
+
+# Ignore rbenv files.
+.ruby-version
+.ruby-gemset
+
+# Ignore vendor bundles.
+/vendor/bundle
+/vendor/cache
+/.bundle/
+
+# Ignore documentation.
+/doc/
+/rdoc/
+
+# Ignore backup files.
+*~
+*.bak
+*.orig
+
+# Ignore system files.
+Thumbs.db
+.DS_Store
+
+# Ignore test tmp files.
+/test/tmp/
+/spec/tmp/
+
+# Ignore simplecov coverage.
+/coverage/
+
+# Ignore RuboCop cache.
+.rubocop-*
+
+# Ignore Rails credentials local override.
+/config/credentials/local.key
+
+# Ignore Solid Cache files.
+/db/solid_cache*
+
+# Ignore local database config overrides.
+/config/database.local.yml
+
+# Ignore pg_data directory if present.
+/pg_data
