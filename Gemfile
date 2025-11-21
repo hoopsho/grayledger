@@ -58,6 +58,10 @@ gem "pundit", "~> 2.4"
 # TASK-2.2: Pagy for high-performance pagination
 gem "pagy", "~> 9.4"
 
+# Rate limiting and security hardening [https://github.com/rack/rack-attack]
+# TASK-4.1: Rack::Attack for DDoS protection and rate limiting
+gem "rack-attack", "~> 6.7"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri windows], require: "debug/prelude"

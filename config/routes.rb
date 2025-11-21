@@ -19,6 +19,19 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # Root path for basic testing
+  root "rails/health#show"
+
+  # ============================================================================
+  # TASK-4.4: Test routes for rate limiting integration tests
+  # ============================================================================
+  # These routes are used only for testing Rack::Attack throttle rules
+  # Always defined so they're available in test environment
+  post "test_otp_generation", to: "test_throttle#otp_generation"
+  post "test_otp_validation", to: "test_throttle#otp_validation"
+  post "test_receipt_upload", to: "test_throttle#receipt_upload"
+  post "test_ai_categorization", to: "test_throttle#ai_categorization"
+  post "test_entry_creation", to: "test_throttle#entry_creation"
+  post "test_general_api", to: "test_throttle#general_api"
+  get "test_general_api", to: "test_throttle#general_api"
 end
