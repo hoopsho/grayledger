@@ -1,0 +1,16 @@
+# Pagy Initializer
+# Fast, powerful pagination with Rails 8
+# See https://ddnexus.github.io/pagy/docs/getting-started
+
+# Pagy default settings for all Pagy instances
+Pagy::DEFAULT[:size] = 20            # Default items per page
+Pagy::DEFAULT[:max_pages] = 1000     # Max pages to prevent DoS
+
+# Frontend defaults
+# Pagy::DEFAULT[:pagy_search_url] = true  # Enable AJAX pagination
+
+# I18n support: uncomment if your site uses i18n
+# Pagy::I18n.load(locale: 'en', filepath: ...)
+
+# Optional: Trim the trailing slash from pagy routes
+# Pagy::DEFAULT[:request_path] = request.path.chomp('/')

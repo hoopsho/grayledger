@@ -1,0 +1,36 @@
+# Example Structured Logs from Grayledger Application
+# Each line is a valid JSON object that can be parsed by log aggregation systems
+
+# Successful GET request to dashboard
+{"timestamp":"2025-11-21T10:30:45.123Z","level":"INFO","event":"request_completed","method":"GET","path":"/dashboard","status":200,"request_id":"c85a8e44-d7f9-4e4e-b2d1-a34b9c2e5f1a","user_id":42,"company_id":99,"ip":"192.0.2.1","duration_ms":87.5}
+
+# POST request creating new entry (slower due to database writes)
+{"timestamp":"2025-11-21T10:30:46.234Z","level":"INFO","event":"request_completed","method":"POST","path":"/entries","status":201,"request_id":"d96b9f55-e8g0-5f5f-c3e2-b45c0d3f6g2b","user_id":42,"company_id":99,"ip":"192.0.2.1","duration_ms":245.3}
+
+# Rate limit hit - user exceeded API threshold
+{"timestamp":"2025-11-21T10:30:47.456Z","level":"WARN","event":"request_completed","method":"POST","path":"/receipts","status":429,"request_id":"e07c0g66-f9h1-6g6g-d4f3-c56d1e4g7h3c","user_id":43,"company_id":100,"ip":"203.0.113.42","duration_ms":12.1,"rate_limited":true}
+
+# Authorization failure - user lacks permission
+{"timestamp":"2025-11-21T10:30:48.567Z","level":"WARN","event":"authorization_failure","policy":"EntryPolicy","action":"destroy?","user_id":42,"company_id":99,"ip":"192.0.2.1"}
+
+# Server error - 500 Internal Server Error
+{"timestamp":"2025-11-21T10:30:49.678Z","level":"ERROR","event":"request_completed","method":"GET","path":"/api/accounts/999","status":500,"request_id":"f18d1h77-gai2-7h7h-e5g4-d67e2f5h8i4d","user_id":42,"company_id":99,"ip":"192.0.2.1","duration_ms":123.4}
+
+# Client error - 404 Not Found
+{"timestamp":"2025-11-21T10:30:50.789Z","level":"WARN","event":"request_completed","method":"GET","path":"/accounts/nonexistent","status":404,"request_id":"g29e2i88-hbj3-8i8i-f6h5-e78f3g6i9j5e","user_id":42,"company_id":99,"ip":"192.0.2.1","duration_ms":45.2}
+
+# Slow request warning (200ms+ response time)
+{"timestamp":"2025-11-21T10:30:51.890Z","level":"WARN","event":"request_completed","method":"GET","path":"/reports/trial-balance","status":200,"request_id":"h3af3j99-ick4-9j9j-g7i6-f89g4h7j0k6f","user_id":42,"company_id":99,"ip":"192.0.2.1","duration_ms":523.7}
+
+# Health check (skipped from logs to prevent spam)
+# GET /up - no log entry created
+
+# Multi-user concurrent requests
+{"timestamp":"2025-11-21T10:31:00.100Z","level":"INFO","event":"request_completed","method":"GET","path":"/dashboard","status":200,"request_id":"i4bg4kaa-jdl5-0k0k-h8j7-g90h5i8k1l7g","user_id":42,"company_id":99,"ip":"192.0.2.1","duration_ms":65.2}
+{"timestamp":"2025-11-21T10:31:00.105Z","level":"INFO","event":"request_completed","method":"GET","path":"/accounts","status":200,"request_id":"j5ch5lbb-kem6-1l1l-i9k8-h01i6j9l2m8h","user_id":43,"company_id":100,"ip":"203.0.113.42","duration_ms":78.4}
+
+# Entry creation with metrics tracking [TASK-6.2 integration]
+{"timestamp":"2025-11-21T10:31:05.250Z","level":"INFO","event":"request_completed","method":"POST","path":"/entries","status":201,"request_id":"k6di6mcc-lfn7-2m2m-j0l9-i12j7k0m3n9i","user_id":42,"company_id":99,"ip":"192.0.2.1","duration_ms":156.8}
+
+# Receipt upload and AI categorization [TASK-6.2, future AI integration]
+{"timestamp":"2025-11-21T10:31:10.400Z","level":"INFO","event":"request_completed","method":"POST","path":"/receipts","status":201,"request_id":"l7ej7ndd-mgo8-3n3n-k1m0-j23k8l1n4o0j","user_id":42,"company_id":99,"ip":"192.0.2.1","duration_ms":487.2}
