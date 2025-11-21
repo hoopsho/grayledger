@@ -2,8 +2,8 @@
 
 **Source:** [ADR 01.001](../docs/adrs/01.foundation/01.001.rails-8-minimal-stack.md) | [PRD](./prd-from-adr-01.001.md)
 **Feature Branch:** `feature/adr-01.001-rails-8-minimal-stack`
-**Status:** In Progress - Wave 5 (3/5 tasks complete)
-**Progress:** 20/25 tasks complete (80%)
+**Status:** In Progress - Wave 5 Complete
+**Progress:** 23/25 tasks complete (92%)
 
 ---
 
@@ -156,7 +156,24 @@
 **Goal:** Aggressive caching for sub-200ms responses
 
 ### TASK-5.1: Install and Configure Solid Cache
-- **Status:** [ ] pending
+- **Status:** [x] DONE (2025-11-21)
+- **Notes:** Solid Cache v1.0.10 installed and configured. Database-backed caching without Redis. Separate cache database in production (grayledger_production_cache). All tests passing (5/5 integration tests). Development/test use main database with namespace isolation.
+- **Files Created:**
+  - `/home/cjm/work/grayledger/config/cache.yml` - Cache configuration with 256MB max size
+  - `/home/cjm/work/grayledger/db/cache_schema.rb` - solid_cache_entries table schema
+  - `/home/cjm/work/grayledger/lib/tasks/solid_cache.rake` - Database setup rake task
+  - `/home/cjm/work/grayledger/test/integration/solid_cache_test.rb` - 5 comprehensive tests
+- **Files Modified:**
+  - `/home/cjm/work/grayledger/config/environments/production.rb` - Set cache_store to :solid_cache_store
+  - `/home/cjm/work/grayledger/config/environments/development.rb` - Set cache_store to :solid_cache_store
+  - `/home/cjm/work/grayledger/config/environments/test.rb` - Set cache_store to :solid_cache_store
+  - `/home/cjm/work/grayledger/test/test_helper.rb` - Ensure cache table exists for parallel tests
+- **Acceptance Criteria:**
+  - Solid Cache gem installed ✓
+  - Migrations run and tables created ✓
+  - Production environment configured ✓
+  - Cache verified working (store/retrieve/expire/delete) ✓
+  - Zero Redis dependency ✓
 
 ### TASK-5.2: Implement Russian Doll Caching Patterns
 - **Status:** [x] DONE (2025-11-21)
@@ -191,10 +208,78 @@
   - Ready for use when models are created ✓
 
 ### TASK-5.3: Add Fragment Caching for Expensive Operations
-- **Status:** [ ] pending
+- **Status:** [x] DONE (2025-11-21)
+- **Dependencies:** TASK-5.1 (Solid Cache)
+- **Notes:** Complete CacheService implementation with 10 public methods and 24 comprehensive unit tests. All tests passing (100% pass rate, 97.78% code coverage). Documentation integrated into caching-patterns.md.
+- **Files Created:**
+  - `/home/cjm/work/grayledger/app/services/cache_service.rb` (128 lines):
+    - `fetch_cached(key, expires_in, force_miss, &block)` - Core fetch-or-compute pattern
+    - `nested_key(namespace, segments)` - Hierarchical cache key generation
+    - `warm_cache(keys_with_blocks, expires_in)` - Batch cache warming with lambdas
+    - `delete(key)`, `delete_pattern(pattern)`, `clear_all()` - Cache management
+    - `read(key)`, `write(key, value, expires_in)` - Low-level access
+    - `exists?(key)`, `stats()` - Cache introspection
+  - `/home/cjm/work/grayledger/test/services/cache_service_test.rb` (349 lines):
+    - 24 comprehensive tests covering all functionality
+    - Tests: fetch cached, cache hits/misses, TTL expiration, nested keys, pattern deletion
+    - Tests: cache warming, deletion, clearing, complex objects, integration patterns
+    - 97.78% code coverage (44/45 lines)
+  - `/home/cjm/work/grayledger/doc/caching-patterns.md` (updated):
+    - CacheService API reference
+    - Cache key naming conventions
+    - Expiration strategies (time-based, event-based)
+    - Use cases: account balances, reports, dashboards, pagination
+    - Performance considerations
+    - Solid Cache production notes
+- **Acceptance Criteria:**
+  - CacheService implemented with core methods ✓
+  - Fetch-or-compute pattern working ✓
+  - Hierarchical cache key generation ✓
+  - Cache warming with block support ✓
+  - Pattern deletion with graceful fallback ✓
+  - All 24 unit tests passing ✓
+  - 97.78% code coverage ✓
+  - Documentation complete ✓
+  - Integration patterns demonstrated ✓
 
 ### TASK-5.4: Implement Cache Invalidation Logic
-- **Status:** [ ] pending
+- **Status:** [x] DONE (2025-11-21)
+- **Dependencies:** TASK-5.3 (CacheService from TASK-5.5)
+- **Notes:** Complete automatic cache invalidation system with AutoCacheInvalidator concern, Cacheable concern integration, and comprehensive test suite. All 11 tests passing.
+- **Files Created:**
+  - `/home/cjm/work/grayledger/app/models/concerns/auto_cache_invalidator.rb`:
+    - Automatic `after_commit` hooks on create, update, destroy
+    - `invalidate_associated_caches` method for subclass override
+    - Clear documentation and examples for implementation
+  - `/home/cjm/work/grayledger/test/models/concerns/auto_cache_invalidator_test.rb`:
+    - 11 comprehensive tests covering all scenarios
+    - Tests for hook registration and execution
+    - Cache invalidation verification after save/update/destroy
+    - Custom invalidation logic override testing
+    - Multi-model invalidation patterns
+    - Rollback behavior validation
+    - CacheService integration testing
+- **Files Updated:**
+  - `/home/cjm/work/grayledger/app/models/concerns/cacheable.rb`:
+    - Added `include AutoCacheInvalidator` to Cacheable
+    - Added `invalidate_associated_caches` method documentation
+    - Example showing both Russian doll + explicit cache invalidation
+  - `/home/cjm/work/grayledger/doc/caching-patterns.md`:
+    - Complete cache invalidation strategy section
+    - Explanation of all three complementary patterns (Russian doll, AutoCacheInvalidator, CacheService)
+    - Examples for each invalidation pattern
+    - When to use each pattern
+    - Testing cache invalidation best practices
+    - Integration with services and controllers
+- **Acceptance Criteria:**
+  - AutoCacheInvalidator concern created ✓
+  - after_commit hooks registered on [:create, :update, :destroy] ✓
+  - Cacheable includes AutoCacheInvalidator ✓
+  - Override mechanism documented and working ✓
+  - Comprehensive test suite with 11 passing tests ✓
+  - Test coverage validates hook calls and cache deletion ✓
+  - Documentation includes strategy, patterns, and examples ✓
+  - Works seamlessly with CacheService ✓
 
 ### TASK-5.5: Create Performance Benchmarks
 - **Status:** [x] DONE (2025-11-21)
@@ -303,9 +388,9 @@
 ## Summary Statistics
 
 - **Total Tasks:** 25
-- **Completed:** 20
+- **Completed:** 23
 - **In Progress:** 0
-- **Pending:** 5
+- **Pending:** 2
 - **Blocked:** 0
 
 **Progress by Wave:**
@@ -313,7 +398,7 @@
 - Wave 2 (Core Gems): 3/3 complete (100%) ✓
 - Wave 3 (Testing): 6/6 complete (100%) ✓
 - Wave 4 (Security): 5/5 complete (100%) ✓
-- Wave 5 (Caching): 3/5 complete (60%)
+- Wave 5 (Caching): 5/5 complete (100%) ✓
 - Wave 6 (Observability): 0/5 complete (0%)
 - Wave 7 (Validation): 0/2 complete (0%)
 - Wave 8 (Final): 0/3 complete (0%)
@@ -321,5 +406,5 @@
 ---
 
 **Last Updated:** 2025-11-21
-**Status:** Wave 5 - TASK-5.5 COMPLETE! Performance Benchmarks implemented and all tests passing.
-**Next Step:** Wave 5 - TASK-5.1 Install and Configure Solid Cache OR Wave 5 - TASK-5.3 Add Fragment Caching
+**Status:** Wave 5 COMPLETE! All caching and performance optimization tasks done. 92% overall progress.
+**Next Step:** Wave 6 - TASK-6.1 Create MetricsTracker Service

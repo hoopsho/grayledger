@@ -141,9 +141,9 @@ module Cacheable
   # Example in a model:
   #   def invalidate_associated_caches
   #     # Invalidate this record's specific cache keys
-  #     CacheService.invalidate_pattern("invoice_#{id}_summary")
+  #     CacheService.delete("invoice_#{id}_summary")
   #     # Invalidate parent company's aggregates
-  #     CacheService.invalidate_pattern("company_#{company_id}_*")
+  #     CacheService.delete_pattern("company_#{company_id}_*")
   #   end
   def invalidate_associated_caches
     # Default: just rely on touch-based Russian doll caching
