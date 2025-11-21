@@ -265,67 +265,43 @@ rails benchmark:all
 | P95 response time | < 100ms | < 200ms | 95th percentile |
 | P99 response time | < 150ms | < 300ms | 99th percentile |
 
-### Sample Results
+### Sample Results (MemoryStore - Development)
 
-**Development (MemoryStore):**
 ```
 === Cache Hit vs Miss Performance ===
-Cache Hit (100 reads):        0.15ms
-Cache Miss (100 fetches):     2.50ms
-Speedup: 16.67x
+Cache Hit (100 reads):        4.18ms (0.0418ms per read)
+Cache Miss (100 fetches):     7.80ms (0.0780ms per fetch)
+Speedup: 1.87x
 
 === Nested Cache Key Generation ===
-Total time (1000 iterations):  2.35ms
-Average per iteration:          2.35µs
+Total time (1000 iterations):  2.69ms
+Average per iteration:         2.69µs
 
 === Cache Warm-Up Performance ===
-Warming 10 keys:               5.20ms
-Average per key:               0.52ms
+Warming 10 keys: 1.25ms
+Average per key: 0.13ms
 
 === Cache Delete Performance ===
-Deleting 100 keys:             0.85ms
-Average per delete:            0.0085ms
+Deleting 100 keys: 3.11ms
+Average per delete: 0.031ms
 
 === Complex Object Caching ===
-Reading complex object 100 times: 0.45ms
-Average per read:                 0.0045ms
+Reading complex object 100 times: 23.2ms
+Average per read: 0.232ms
 
 === Sub-200ms Response Time Target ===
-Average response time: 8.35ms
-Min response time: 0.25ms
-Max response time: 45.30ms
-Requests under 200ms: 100.0%
+Average response time: 0.12ms
+Min response time: 0.08ms
+Max response time: 0.22ms
+Requests under 200ms: 100%
 ```
 
-**Production (Solid Cache):**
-```
-=== Cache Hit vs Miss Performance ===
-Cache Hit (100 reads):        15.50ms (database round-trip)
-Cache Miss (100 fetches):    250.00ms (with block execution)
-Speedup: 16.13x
-
-=== Nested Cache Key Generation ===
-Total time (1000 iterations):  2.40ms
-Average per iteration:          2.40µs
-
-=== Cache Warm-Up Performance ===
-Warming 10 keys:              35.00ms
-Average per key:               3.50ms
-
-=== Cache Delete Performance ===
-Deleting 100 keys:            18.50ms
-Average per delete:            0.185ms
-
-=== Complex Object Caching ===
-Reading complex object 100 times: 1.85ms
-Average per read:                 0.0185ms
-
-=== Sub-200ms Response Time Target ===
-Average response time: 45.20ms
-Min response time: 12.50ms
-Max response time: 180.30ms
-Requests under 200ms: 98.5%
-```
+**Key Observations:**
+- All metrics well under targets
+- Cache hits are ~2x faster than misses (expected with lightweight operations)
+- Nested key generation is extremely fast (2.69µs)
+- Complex object handling is efficient (0.232ms per read)
+- Sub-200ms target is easily met (100% of requests)
 
 ## Interpreting Results
 
