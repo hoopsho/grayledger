@@ -26,10 +26,22 @@ class CacheService
   # @param block [Proc] - block to execute if cache miss
   # @return [Object] - cached or freshly computed value
   def self.fetch_cached(key, expires_in: 1.hour, force_miss: false, &block)
-    return cache_store.fetch(key, expires_in: expires_in, &block) unless force_miss
+    # Try to read from cache first [TASK-6.2 - Track cache hits/misses]
+    value = cache_store.read(key) unless force_miss
 
-    # Force a cache miss by deleting first
-    cache_store.delete(key)
+    if value.present?
+      # Cache hit
+      MetricsTracker.track_counter("cache_hits", 1)
+      return value
+    end
+
+    # Cache miss - compute and store
+    MetricsTracker.track_counter("cache_misses", 1)
+
+    if force_miss
+      cache_store.delete(key)
+    end
+
     cache_store.fetch(key, expires_in: expires_in, &block)
   end
 
