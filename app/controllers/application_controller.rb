@@ -11,6 +11,9 @@ class ApplicationController < ActionController::Base
   # Default authorization failure handler for Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  # Add rate limit headers to successful responses [TASK-4.3]
+  after_action :add_rate_limit_headers
+
   private
 
   def user_not_authorized(exception)
@@ -23,6 +26,25 @@ class ApplicationController < ActionController::Base
       render json: {error: "You are not authorized to perform this action"}, status: :forbidden
     else
       redirect_to root_url, alert: "You are not authorized to perform this action"
+    end
+  end
+
+  def add_rate_limit_headers
+    # Only add headers if rate limit data is available and response is successful
+    if request.env["rack.attack.match_data"] && response.status < 400
+      match_data = request.env["rack.attack.match_data"]
+      limit = match_data[:limit]
+      count = match_data[:count]
+      period = match_data[:period]
+      now = Time.now.to_i
+
+      # Calculate reset time and remaining
+      reset_time = ((now / period) + 1) * period
+      remaining = [limit - count, 0].max
+
+      response.headers["X-RateLimit-Limit"] = limit.to_s
+      response.headers["X-RateLimit-Remaining"] = remaining.to_s
+      response.headers["X-RateLimit-Reset"] = reset_time.to_s
     end
   end
 end

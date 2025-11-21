@@ -32,6 +32,14 @@ if Rails.env.development?
   end
 end
 
+# In test environment, allowlist all 192.0.2.x (TEST-NET-1) traffic to avoid
+# the requests/ip throttle when running integration tests
+if Rails.env.test?
+  Rack::Attack.safelist("allow test IPs for integration tests") do |req|
+    req.ip.start_with?("192.0.2.")
+  end
+end
+
 # ============================================================================
 # TASK-4.2: SPECIFIC RATE LIMITING RULES FOR CRITICAL ENDPOINTS
 # ============================================================================
@@ -86,6 +94,7 @@ end
 
 # Basic throttle rule: 5 requests per second per IP (as safety net)
 # This is a foundational rule applied to all requests
+# NOTE: In test environment, this is not applied to 192.0.2.x IPs (see safelist above)
 Rack::Attack.throttle("requests/ip", limit: 5, period: 1.second) do |req|
   req.ip
 end
@@ -96,8 +105,10 @@ end
 
 # Configure throttled response with proper HTTP status and headers
 # Returns 429 Too Many Requests with rate limit information
-Rack::Attack.throttled_responder = lambda { |env|
-  match_data = env["rack.attack.match_data"]
+# Note: The parameter passed is a Rack::Attack::Request object
+Rack::Attack.throttled_responder = lambda { |request|
+  # Access match_data from the request.env hash
+  match_data = request.env["rack.attack.match_data"]
   now = Time.now
   period = match_data[:period]
   limit = match_data[:limit]

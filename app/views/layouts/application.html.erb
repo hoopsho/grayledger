@@ -22,7 +22,9 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
 
     <%# Importmap for zero-build-step ESM JavaScript -%>
-    <%= importmap_tags %>
+    <% if defined?(importmap_tags) %>
+      <%= importmap_tags %>
+    <% end %>
   </head>
 
   <body>
